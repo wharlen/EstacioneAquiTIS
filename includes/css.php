@@ -4,3 +4,4 @@
 <link rel="stylesheet" type="text/css" href="css/menu.css">
 <!--<link rel="stylesheet" type="text/css" href="css/bootstrap.css">-->
 <link rel="stylesheet" type="text/css" href="css/estilo1.css">
+ <link rel="stylesheet" href="css/bootstrap.min.css">

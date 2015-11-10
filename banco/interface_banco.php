@@ -8,9 +8,9 @@
         
         public function conectaBanco($diretorio='',$usuario='',$senha=''){
             if($diretorio != '' && $usuario != '' && $senha != ''){
-            return $this->conexao = mysql_connect($diretorio,$usuario,$senha) or die(mysql_error());
+            return $this->conexao = mysqli_connect($diretorio,$usuario,$senha) or die(mysql_error());
             }
-            return $this->conexao = mysql_connect("localhost","root",null) or die(mysql_error());
+            return $this->conexao = mysqli_connect("localhost","root",null) or die(mysql_error());
         }
 
         // Função que seleciona pra qual banco será conectado
@@ -18,20 +18,20 @@
             if($banco != ''){
                 $this->bd = $banco;
             }
-            return mysql_select_db($this->bd);
+            return mysqli_select_db($this->conexao,$this->bd);
         }
 
         // Função que serve para finalizar a conexão com banco
         public function fecharBanco(){
             
-            return mysql_close($this->conexao);
+            return mysqli_close($this->conexao);
             
         }
 
         // Função que serve para executar um comando SQL
         public function executarSQL($query){
             if($query != ''){
-            return mysql_query($query);
+            return mysqli_query($this->conexao,$query);
             }
             return '';
         }
@@ -39,7 +39,7 @@
         // Função que serve para obter os dados da consulta SQL por linhas
         public function obterDadosSQL($resultado){
             if($resultado != ''){
-            return mysql_fetch_array($resultado);
+            return mysqli_fetch_array($resultado);
             }
             return '';
         }
@@ -47,7 +47,7 @@
         // Função que retorna a quantidade de linhas de uma consulta
         public function obterQtdeSQL($result){
             if($result != ''){
-            return mysql_num_rows($result);
+            return mysqli_num_rows($result);
             }
             return '';
         }

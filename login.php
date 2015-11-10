@@ -6,11 +6,11 @@ if ((isset($_SESSION['login']) == true) and ( isset($_SESSION['senha']) == true)
     exit;
 }
 
-$con = mysql_connect("localhost", "root", "") or die("Sem conexão com o servidor");
-$select = mysql_select_db("estacionebd") or die("Sem acesso ao DB");
+$con = mysqli_connect("localhost", "root", "") or die("Sem conexão com o servidor");
+$select = mysqli_select_db($con, "estacionebd") or die("Sem acesso ao DB");
 
 // A vriavel $result pega as varias $login e $senha, faz uma pesquisa na tabela de usuarios
-mysql_query("UPDATE CASA SET cs_bloqueado = 'S' WHERE cs_bloqueado != 'S' AND cs_datalimite < '" . date("Y-m-d") . "'");
+mysqli_query($con,"UPDATE CASA SET cs_bloqueado = 'S' WHERE cs_bloqueado != 'S' AND cs_datalimite < '" . date("Y-m-d") . "'");
 ?>
 <html>
     <head>
