@@ -1,0 +1,6 @@
+a data inicial: nao pode ser durante o periodo de um serviço já marcado,
+ela pode ser lançada antes ou depois
+
+
+e se a data inicial veio antes de um periodo de um outro serviço, 
+a data final só pode ser lançada antes do mesmo (nada de durante e nem depois).

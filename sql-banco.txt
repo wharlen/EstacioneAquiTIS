@@ -1,0 +1,112 @@
+Script para criação do banco de dados
+
+1- Crie o banco com o nome "estacionebd" ou digite esse comando na aba SQL do programa:
+
+create database estacionebd;
+
+
+2- Após isso, abra o banco criado,
+
+3- Dentro dele, copie e cole esse script abaixo na aba SQL do banco:
+
+create table usuario(
+    us_codigo int unsigned auto_increment,
+    us_nome varchar(100) not null,
+    us_cpf varchar(15) not null,
+    us_sexo varchar(1) not null,
+    us_telefone varchar(15),
+    us_datanascimento date,
+    us_rg varchar(15),
+    us_login varchar(20) not null,
+    us_senha varchar(32),
+    us_status varchar(1) not null default 'A',
+    primary key (us_codigo)
+);
+
+create table casa(
+    cs_codigo int unsigned auto_increment,
+    cs_cep varchar(10),
+    cs_endereco varchar(100) not null,
+    cs_numero varchar(5),
+    cs_bairro varchar(100) not null,
+    cs_cidade varchar(100) not null,
+    cs_estado varchar(100) not null,
+    cs_datacriacao date,
+    cs_datalimite date,
+    cs_seguro varchar(1) not null default 'N',
+    cs_bloqueado varchar(1) not null default 'N',
+    cs_animal varchar(1) not null default 'N',
+    cs_pacote varchar(1),	
+    cs_status varchar(1) not null default 'A',
+    cs_usuario int unsigned not null,
+    primary key (cs_codigo),
+    foreign key (cs_usuario) references usuario(us_codigo)  on delete no action
+);
+
+create table veiculo(
+    vc_codigo int unsigned auto_increment,
+    vc_marca varchar(40) not null,
+    vc_modelo varchar(40) not null,
+    vc_cor varchar(20),
+    vc_ano varchar(5) not null,
+    vc_placa varchar(9) not null,
+    vc_carroceria varchar(3) not null default 'M',
+    vc_status varchar(1) not null default 'A',
+    vc_usuario int unsigned not null,
+    primary key (vc_codigo),
+    foreign key (vc_usuario) references usuario(us_codigo) on delete no action
+);
+
+create table vaga(
+    vg_codigo int unsigned auto_increment,
+    vg_descricao varchar(50),
+    vg_valorinicial decimal(10,2),
+    vg_tipo varchar(1) not null default 'D',
+    vg_tamanho varchar(3) not null default 'M',
+    vg_situacao varchar(1) not null default 'D',
+    vg_bloqueado varchar(1) not null default 'N',
+    vg_status varchar(1) not null default 'A',
+    vg_casa int unsigned not null,
+    vg_veiculo int unsigned,
+    primary key (vg_codigo),
+    foreign key (vg_casa) references casa(cs_codigo)  on delete no action,
+    foreign key (vg_veiculo) references veiculo(vc_codigo)  on delete no action
+);
+
+create table servico(
+    sv_codigo int unsigned auto_increment,
+    sv_datainicial datetime not null,
+    sv_datafinal datetime,
+    sv_valortotal decimal(10,2),
+    sv_tipoPagamento varchar(1),
+    sv_observacao text,
+    sv_situacao varchar(1) not null default 'P',
+    sv_status varchar(1) not null default 'A',
+    sv_usuario int unsigned not null,
+    sv_veiculo int unsigned not null,
+    sv_vaga int unsigned not null,
+    primary key (sv_codigo),
+    foreign key (sv_usuario) references usuario(us_codigo) on delete no action,
+    foreign key (sv_veiculo) references veiculo(vc_codigo) on delete no action,
+    foreign key (sv_vaga) references vaga(vg_codigo) on delete no action
+);
+
+create table satisfacao(
+    sf_codigo int unsigned auto_increment,
+    sf_nota varchar(1),
+    sf_cliente int unsigned not null,
+    sf_proprietario int unsigned not null,
+    primary key(sf_codigo),
+    foreign key(sf_cliente) references usuario(us_codigo) on delete no action,
+    foreign key(sf_proprietario) references usuario(us_codigo) on delete no action
+);
+
+create table fundo(
+    fd_codigo int unsigned auto_increment,
+    fd_descricao varchar(20),
+    fd_bolsa decimal(14,2),
+    primary key(fd_codigo)
+);
+
+insert into fundo (fd_descricao, fd_bolsa) values ("bolsa1", 0.00);
+insert into usuario (us_nome, us_cpf, us_sexo, us_datanascimento, us_rg, us_login, us_senha) values ("Administrador", "000.000.000-00", "M", "01/01/1990", "adm", "admin", "21232f297a57a5a743894a0e4a801fc3")
