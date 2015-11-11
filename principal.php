@@ -21,7 +21,7 @@
         ?>
     </head>
     <body>
-        <div align="center">
+        <div class="container">
             <?php include "includes/menu.php"?>
         <h3 class="titulo1">BEM VINDO <?=strtoupper($_SESSION['login'])?></h3>
         

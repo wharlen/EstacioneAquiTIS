@@ -24,6 +24,8 @@
         //Incluindo arquivos para leitura de javascrript e CSS
             include "includes/js-jquery.php"; 
             include "includes/css.php"; 
+            if($_GET['tipo']=='CS')
+
         ?>
         <script type="text/javascript">
             
@@ -137,6 +139,7 @@
                     <?= input_form("radio", "pacote","","6m")?>aprox. 6 meses: R$182,00&nbsp;
                     <?= input_form("radio", "pacote","","1a")?>1 ano: R$365,00&nbsp;
                     </td></tr>
+              
                     <tr><td>&nbsp;</td></tr>
                     <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
                     <tr><td>&nbsp;</td></tr>

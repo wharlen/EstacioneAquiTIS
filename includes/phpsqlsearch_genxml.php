@@ -18,7 +18,7 @@ if (!$connection) {
 }
 
 // Set the active mySQL database
-$db_selected = mysql_select_db($usuario, $senha);
+$db_selected = mysql_select_db($usuario, $connection);
 if (!$db_selected) {
   die ("Can\'t use db : " . mysql_error());
 }

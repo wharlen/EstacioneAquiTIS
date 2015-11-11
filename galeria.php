@@ -18,11 +18,12 @@
         //Incluindo arquivos para leitura de javascript e CSS
             include "includes/js-jquery.php"; 
             include "includes/css.php";  
+                        include "includes/maps.php";
         ?>
         
     </head>
     <body>
-        <div align="center">
+        <div class="container">
             <?php
             //incluindo arquivo de menus
             include "includes/menu.php";
@@ -66,7 +67,7 @@
                         <a href="visualizar.php?tipo=VC&cod=<?=$veiculo['vc_codigo']?>" title="Visualizar"><img src="img/visualizar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
                         <a href="edicao.php?tipo=VC&cod=<?=$veiculo['vc_codigo']?>"><img src="img/editar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
                         <a href="javascript: validaExclusao('<?=$veiculo['vc_codigo']?>', 'VC');" title="Excluir"><img src="img/excluir.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        
+                 
                     </td>
                 </tr></tbody>
             
@@ -115,10 +116,10 @@
                         <a href="visualizar.php?tipo=CS&cod=<?=$casa['cs_codigo']?>" title="Visualizar"><img src="img/visualizar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
                         <a href="edicao.php?tipo=CS&cod=<?=$casa['cs_codigo']?>"><img src="img/editar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
                         <a href="javascript: validaExclusao('<?=$casa['cs_codigo']?>','CS');" title="Excluir"><img src="img/excluir.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        
+                        <a href="ver_no_mapa.php?tipo=CS&cod=<?=$casa['cs_codigo']?>" title="Ver no Mapa">Ver no mapa</a>
                     </td>
                     </tr></tbody>
-            
+                  
                 <?php }
                 ?>
             </table>  </div> 

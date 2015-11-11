@@ -4,7 +4,7 @@
     require "banco/interface_banco.php";
     require "banco/interface_sql.php";
     
-    //Instanciando os objetos de manupulação no BD
+    //Instanciando os objetos de manipulação no BD
     $ib = new InterfaceBanco();
     
     
