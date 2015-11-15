@@ -29,7 +29,6 @@
         ?>
         <script type="text/javascript">
             
-            $(document).ready(function(){
                $("#botaoscasa").click(function(){
                    if($("#casadavaga").val() != ""){
                        $("#inserirvaga").show();
@@ -50,6 +49,7 @@
             });
             
         </script>
+        <?php require"includes/maps_cadastro.php";?>
     </head>
     <body>
         <div align="center">
@@ -122,7 +122,7 @@
                 <?= abrir_form("post", "casa", "salvar.php?tipo=CS", "return validaCasa(this,'C');")?>
                 <table>
                     <tr><td>CEP:*</td><td><?= input_form("", "cep","cep","","size='12' onblur='javascript: pesquisacep(this.value);'")?></td></tr>
-                    <tr><td>Rua/Avenida:*</td><td><?= input_form("", "endereco","endereco","","size='31'")?>&nbsp;&nbsp;&nbsp;Nº:*&nbsp;<?= input_form("", "numero","","","size='5' onkeyup='mascara(this,\"9999\");' onkeypress='mascara(this,\"9999\");' ")?></td></tr>
+                    <tr><td>Rua/Avenida:*</td><td><?= input_form("", "endereco","endereco","","size='31'")?>&nbsp;&nbsp;&nbsp;Nº:*&nbsp;<?= input_form("", "numero","numero","","size='5' onkeyup='mascara(this,\"9999\");' onkeypress='mascara(this,\"9999\");' ")?></td></tr>
                     <tr><td>Bairro:*</td><td><?= input_form("", "bairro","bairro","","size='20'")?></td></tr>
                     <tr><td>Cidade:*</td><td><?= input_form("", "cidade","cidade","","size='16'")?></td></tr>
                     <tr><td>Estado (UF):*</td><td><?= input_form("", "estado","estado","","size='5' onkeyup='mascara(this,\"LL\");' onkeypress='mascara(this,\"LL\");' ")?></td></tr>
@@ -139,12 +139,23 @@
                     <?= input_form("radio", "pacote","","6m")?>aprox. 6 meses: R$182,00&nbsp;
                     <?= input_form("radio", "pacote","","1a")?>1 ano: R$365,00&nbsp;
                     </td></tr>
-              
+                    
+                    <tr><td>
+                    <label>Procurar no mapa: </label>
+                    <?= input_form("", "latitude","latitude","","size='20' class=\"lat\"")?>
+                    <?= input_form("", "longitude","longitude","","size='20'")?>
+                    </td>
+                    <td>
+                    <input id="txtAddress" type="text" class="text" value=""/> <input type="button" id="btnGo" value="Procurar" />
+                    <span id="spnCoordinates" style="color:Green;font-weight:bold;"></span>
+                    </td></tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
                     <tr><td>&nbsp;</td></tr>
                     <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
                 </table>
+                 <div id="map_canvas" width="100%" height="250px">
+                    </div>
                 <?= fecha_form() ?>
             </div>
                 <?php 

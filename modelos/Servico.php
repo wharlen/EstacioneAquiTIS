@@ -13,7 +13,9 @@ class Servico {
     private $vaga;
     private $veiculo;
     private $usuario;
-    
+    private $latitude;
+    private $longitude;
+
     public function setCodigo($codigo){
         if($codigo != ''){
             $this->codigo = $codigo;
@@ -111,6 +113,22 @@ class Servico {
     }
     public function getUsuario(){
         return $this->usuario;
+    }
+    public function setLatitude($Latitude){
+        if($Latitude != ''){
+            $this->Latitude = $Latitude;
+        }
+    }
+    public function getLatitude(){
+        return $this->Latitude;
+    }
+    public function setLongitude($longitude){
+        if($longitude != ''){
+            $this->longitude = $longitude;
+        }
+    }
+    public function getLongitude(){
+        return $this->longitude;
     }
     
     

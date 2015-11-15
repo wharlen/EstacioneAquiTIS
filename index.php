@@ -15,7 +15,7 @@
             if(isset($_SESSION['login'])){
                 header('location: principal.php');exit;
             }else{
-                header ("location: login.php");exit;
+                header ("location: principal.php");exit;
             }
             
             

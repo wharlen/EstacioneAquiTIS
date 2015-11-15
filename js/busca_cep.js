@@ -17,6 +17,7 @@ function limpa_formulário_cep() {
             document.getElementById('bairro').value=(conteudo.bairro);
             document.getElementById('cidade').value=(conteudo.localidade);
             document.getElementById('estado').value=(conteudo.uf);
+            document.getElementById('txtAddress').value=(conteudo.logradouro+','+conteudo.bairro+','+conteudo.localidade+','+conteudo.uf);
            // document.getElementById('ibge').value=(conteudo.ibge);
         } //end if.
         else {

@@ -44,7 +44,7 @@ if (isset($_SESSION['login'])){?>
              <ul class="dropdown-menu">
                 <li><a href="procurar_vaga.php">Estacionar em uma Vaga</a></li>
                 <li><a href="galeria.php?tipo=SV">Meus Serviços</a></li>
-                <li><a href="galeria.php?tipo=SVU">Serviços de Clientes</a></li>
+                <li><a href="ver_vagas.php?tipo=CS">Serviços de Clientes</a></li>
                 <li><a href="mensagens.php?m=23">Rotas de Acesso</a></li>
                 <li><a href="enquete.php">Enquete de Satisfação</a></li>
                 <li><a href="fechamento.php">Fechar Serviço</a></li></ul>

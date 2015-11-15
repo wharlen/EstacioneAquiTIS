@@ -142,6 +142,8 @@ if (isset($_POST)) {
             $cs->setAnimal($_POST['animal']);
             $cs->setPacote($pacote);
             $cs->setUsuario($_SESSION['codigo_usuario']);
+            $cs->setLatitude($_POST['latitude']);
+            $cs->setLongitude($_POST['longitude']);
         } catch (Exception $e) {
             header("location: mensagens.php?m=3");exit;
         } 

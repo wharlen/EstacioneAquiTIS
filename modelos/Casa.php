@@ -16,6 +16,8 @@ class Casa {
     private $pacote;
     private $animal;
     private $status;
+    private $latitude;
+    private $longitude;
     
     private $usuario;
     
@@ -153,6 +155,22 @@ class Casa {
     public function getUsuario(){
         return $this->usuario;
     }
+    public function setLatitude($latitude){
+        if($latitude != ''){
+            $this->latitude = $latitude;
+        }
+    }
+    public function getLatitude(){
+        return $this->latitude;
+    }
+    public function setLongitude($longitude){
+        if($longitude != ''){
+            $this->longitude = $longitude;
+        }
+    }
+    public function getLongitude(){
+        return $this->longitude;
+    }
     
     
     var $pTabela = 'casa';
@@ -181,7 +199,9 @@ class Casa {
             "cs_seguro" => $this->getSeguro(),
             "cs_animal" => $this->getAnimal(),
             "cs_pacote" => $this->getPacote(),
-            "cs_usuario" => $this->getUsuario()
+            "cs_usuario" => $this->getUsuario(),
+            "cs_latitude" => $this->getLatitude(),
+            "cs_longitude" => $this->getLongitude()
         );
         return funCreate($this->pTabela, $pColunas_banco );
     }
