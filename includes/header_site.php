@@ -1,13 +1,4 @@
-<?php
-     //incluindo arquivo de conexao ao banco
-    require "includes/database.php";
-    //incluindo arquivo de Classes/Modelos de dados
-    require "includes/modelo.php";
-    //incluindo arquivo de funções auxiliares
-    include "includes/funcoes.php";
-    //incluindo arquivo de titulo da pagina
-    include "includes/configsys.php";
-?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -18,40 +9,12 @@
     <link rel="stylesheet" type="text/css" href="css/site/flexslider/flexslider.css" media="screen, projection">
     <link rel="stylesheet" type="text/css" href="css/site/realocation.css" media="screen, projection" id="css-main">
         <link rel="stylesheet" type="text/css" href="css/site/blue.css" media="screen, projection" id="css-main">
- <?php   
-
-        ?>
-    </head>
-
-<body>
-
-<div id="wrapper">
-    <div id="header-wrapper">
-        <div id="header">
-    <div id="header-inner">
-
-        <div class="header-top">
-            <div class="container">
-                <div class="header-identity">
-                    <a href="index.html" class="header-identity-target">
-                        <img src="img/map_icon.png">
-                        <span class="header-slogan">Garagem Compartilhada<br>Economia Compartilhada</span><!-- /.header-slogan -->
-                    </a><!-- /.header-identity-target-->
-                </div><!-- /.header-identity -->
- <?php if(!isset($_SESSION['codigo_usuario'])): ?>
-                <div class="header-actions pull-right">
-                    <a href="cadastro.php?tipo=US" class="btn btn-regular">Criar conta</a> <strong class="separator">ou</strong> <a href="login.php" class="btn btn-primary"><i class="fa fa-plus"></i>Faça Login</a>
-                </div><!-- /.header-actions -->
-<?php endif; ?>
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".header-navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div><!-- /.container -->
-        </div><!-- .header-top -->
-
-       <?php include"includes/menu_site.php";?>
-    </div><!-- /.header-inner -->
-</div><!-- /#header -->    </div><!-- /#header-wrapper -->
+ <style>            .carregando{
+                color:#666;
+                display:none;
+            }
+            .infoBox { background-color: #FFF; width: 300px; font-family: Arial, Helvetica, sans-serif; font-size: 14px; border: 2px solid #3fa7d8; border-radius: 3px; margin-top: 10px }
+.infoBox p { padding: 0 15px }
+.infoBox:before { border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid #3fa7d8; top: -10px; content: ""; height: 0; position: absolute; width: 0; left: 138px }</style>
+    
+   

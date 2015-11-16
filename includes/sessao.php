@@ -4,7 +4,7 @@
          if(isset($_GET['sair'])){
              unset($_SESSION['login']); 
              unset($_SESSION['senha']); 
-             header('location:index.php');exit;
+             header('location:principal.php');exit;
          }
          
          if(!isset($_SESSION['login'])){

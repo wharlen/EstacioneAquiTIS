@@ -12,65 +12,43 @@ $select = mysqli_select_db($con, "estacionebd") or die("Sem acesso ao DB");
 // A vriavel $result pega as varias $login e $senha, faz uma pesquisa na tabela de usuarios
 mysqli_query($con,"UPDATE CASA SET cs_bloqueado = 'S' WHERE cs_bloqueado != 'S' AND cs_datalimite < '" . date("Y-m-d") . "'");
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Login - ESTACIONEAQUI.COM</title>
-        <?php include "includes/js-jquery.php" ?>
-        <?php include "includes/css.php" ?>
+<?php include"includes/header_site.php";?>
 
-    </head>
-    <body>
+ <div id="main-wrapper">
+        <div id="main">
+            <div id="main-inner">
+                <div class="container">
+                    <div class="block-content block-content-small-padding">
+                        <div class="block-content-inner">
+                            <div class="row">
+                                <div class="col-sm-4 col-sm-offset-4">
+                                    <h2 class="center">Login</h2>
 
-        <div align="center" style="width:100%">
-            <?php //include "includes/cabecalho.php" ?>
-            <?php include "includes/menu.php" ?>
+                                    <div class="box">
+                                        <form method="post" action="criar_sessao.php" name="formlogin" onsubmit="return validaLogSenha(this);">
+                                            <div class="form-group">
+                                                <label>Login</label>
+                                                <input type="usr" name="login" class="form-control">
+                                            </div><!-- /.form-group -->
 
-            <form method="post" action="criar_sessao.php" name="formlogin" onsubmit="return validaLogSenha(this);"> 
-                <div align="center" style="width:50%">
-                    <fieldset> 
-                        <legend>Acessar</legend><br /> 
-                        <table>
-                            <tr>
-                                <td><label>Login : </label></td> 
-                                <td><input type="text" name="login"/>&nbsp;&nbsp;</td>
-                                <td><label>Senha :</label></td>
-                                <td><input type="password" name="senha" onkeypress="capLock(event);"/>&nbsp;&nbsp;</td>
-                            <td colspan="2" style="text-align:center;"><input type="submit" value="LOGAR" class="botao01" style="margin:auto"/></td></tr>
-                        </table>
-                        <div id="capsLK" style="visibility:hidden"><span style="color: green">Caps Lock está ativado.</span></div> 
-                        <div align="center" width="50%" border="1">
-                            <small>Caso não possua cadastro: <a href="cadastro.php?tipo=US">Clique aqui</a></small>
-                        </div>
-                    </fieldset> 
-                </div>
-
-            </form>
-            <br><br>
-            <div class="container1">
-                <h3>Você quer localizar uma vaga de estacionamento? </h3>
-                <p>	<small>Veio ao lugar certo! Veja qual a opção abaixo 
-                        é melhor para você.</small></p>
-
-                <div>
-                    <input type="checkbox" name="localizacao"> Marque aqui para buscar uma vaga mais proxima apartir da sua localização.
-
-                    <h4 class="text-heroi"><strong>OU</strong></h4>
-
-                    <p>Digite abaixo o endereço desejado</p>
-
-                    <div class="text-center	 divbusca">
-                        <form role="form" method="post" action="procurar_vaga.php">
-
-                            <input type="text" name="researchv" class="form-contro" id="endereco" placeholder="Rua, nº, Bairro ou Cidade">
-                            <button class="botao01" type="submit">Buscar</button>
-                        </form>
-                    </div>
-                </div> 
-            </div>
-        </div>
-
-
+                                            <div class="form-group">
+                                                <label>Senha</label>
+                                                <input type="password" class="form-control" name="senha" onkeypress="capLock(event);">
+                                            </div><!-- /.form-group -->
+                                        <div id="capsLK" style="visibility:hidden"><span style="color: green">Caps Lock está ativado.</span></div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Login" class="btn btn-primary btn-inversed btn-block">
+                                            </div><!-- /.form-group -->
+                                        </form>
+                                    </div><!-- /.box -->
+                                </div>
+                            </div><!-- /.row -->
+                        </div><!-- /.block-content-inner -->
+                    </div><!-- /.block-content -->
+                </div><!-- /.container -->
+            </div><!-- /#main-inner -->
+        </div><!-- /#main -->
+    </div><!-- /#main-wrapper -->
 
     </body>
 </html>

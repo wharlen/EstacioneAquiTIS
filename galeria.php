@@ -10,19 +10,15 @@
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?=$titulosys?></title>
-        <?php
+    <?php include"includes/header_site.php";
+
         //Incluindo arquivos para leitura de javascript e CSS
-            include "includes/js-jquery.php"; 
-            include "includes/css.php";  
-                        include "includes/maps.php";
-        ?>
+        include "includes/js-jquery.php"; 
+        include "includes/css.php";  
+        include "includes/maps.php";
         
-    </head>
-    <body>
+        include"includes/cabec_site.php";?> 
+
         <div class="container">
             <?php
             //incluindo arquivo de menus
@@ -364,5 +360,6 @@
             ?>
             </div>
         </div>
+    </div>
     </body>
 </html>

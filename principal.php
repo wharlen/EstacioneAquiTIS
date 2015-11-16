@@ -1,4 +1,6 @@
-    <?php include"includes/header_site.php";?>
+    <?php include"includes/header_site.php";
+        include"includes/cabec_site.php";?>
+
 <div id="main-wrapper">
     <div id="main">
         <div id="main-inner">
@@ -10,6 +12,7 @@
             <div id="mapa" data-style="1"></div><!-- /#map -->
 
         <script src="js/mapa/jquery.min.js"></script>
+         <script src="js/mapa/jquery.js"></script>
         <script  src="http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyD0X4v7eqMFcWCR-VZAJwEMfb47id9IZao"></script>
         <script src="js/mapa/infobox.js"></script>
         <script src="js/mapa/markerclusterer.js"></script>
@@ -22,42 +25,62 @@
                             <div class="map-navigation">
                                 <form method="post" action="?" class="clearfix">
                                     <div class="form-group col-sm-12">
-                                        <label>Esado</label>
+                                        <label>Estado</label>
 
                                         <div class="select-wrapper">
-                                            <select id="select-country" class="form-control">
+                                            <select name="selectcountry" id="selectcountry" class="form-control">
                                                 <option value="">Selecionar estado</option>
-                                                <option value="czech-republic">Czech Republic</option>
-                                                <option value="germany">Germany</option>
-                                                <option value="france">France</option>
-                                                <option value="poland">Poland</option>
+                                                <?php
+
+                                                    $sql = "SELECT cod_estados, sigla
+                                                            FROM estados
+                                                            ORDER BY sigla";
+                                                    $res = mysqli_query($ib->conexao,$sql);
+                                                    while ( $row = mysqli_fetch_assoc( $res ) ) {
+                                                        echo '<option value="'.$row['cod_estados'].'">'.$row['sigla'].'</option>';
+                                                    }
+                                                ?>
                                             </select>
                                         </div><!-- /.select-wrapper -->
                                     </div><!-- /.form-group -->
 
                                     <div class="form-group col-sm-12">
                                         <label>Cidade</label>
-
+                                            <span class="carregando">Aguarde, carregando...</span>
                                         <div class="select-wrapper">
-                                            <select id="select-location" class="form-control">
+                                            <select name="selectlocation" id="selectlocation" class="form-control">
                                                 <option value="">Selecionar cidade</option>
-                                                <option value="location-czech-republic-1" class="czech-republic">Location 1</option>
-                                                <option value="location-czech-republic-2" class="czech-republic">Location 2</option>
-                                                <option value="location-czech-republic-3" class="czech-republic">Location 3</option>
-                                                <option value="location-czech-republic-4" class="czech-republic">Location 4</option>
-                                                <option value="location-germany-1" class="germany">Location 1</option>
-                                                <option value="location-germany-2" class="germany">Location 2</option>
-                                                <option value="location-germany-3" class="germany">Location 3</option>
-                                                <option value="location-germany-4" class="germany">Location 4</option>
-                                                <option value="location-france-1" class="france">Location 1</option>
-                                                <option value="location-france-2" class="france">Location 2</option>
-                                                <option value="location-france-3" class="france">Location 3</option>
-                                                <option value="location-france-4" class="france">Location 4</option>
-                                                <option value="location-poland-1" class="poland">Location 1</option>
-                                                <option value="location-poland-2" class="poland">Location 2</option>
-                                                <option value="location-poland-3" class="poland">Location 3</option>
-                                                <option value="location-poland-4" class="poland">Location 4</option>
+                                
                                             </select>
+                                            <!--PEGANDO CIDADES DE ACORDO COM O ESTADO SELECIONADO VIA JSON-->
+                                            <script src="http://www.google.com/jsapi"></script>
+                                            <script type="text/javascript">
+                                              google.load('jquery', '1.3');
+                                            </script>       
+
+                                            <script type="text/javascript">
+                                            $.ajaxSetup({
+                                                timeout: 3000 // 3 segundos
+                                                });
+                                            $(function(){
+                                                $('#selectcountry').change(function(){
+                                                    if( $(this).val() ) {
+                                                        $('#selectlocation').hide();
+                                                        $('.carregando').show();
+                                                        $.getJSON('cidades.ajax.php?search=',{selectcountry: $(this).val(), ajax: 'true'}, function(j){
+                                                            var options = '<option value=""></option>'; 
+                                                            for (var i = 0; i < j.length; i++) {
+                                                                options += '<option value="' + j[i].selectlocation + '">' + j[i].nome + '</option>';
+                                                            }   
+                                                            $('#selectlocation').html(options).show();
+                                                            $('.carregando').hide();
+                                                        });
+                                                    } else {
+                                                        $('#selectlocation').html('<option value="">– Escolha um estado –</option>');
+                                                    }
+                                                });
+                                            });
+                                            </script>
                                         </div><!-- /.select-wrapper -->
                                     </div><!-- /.form-group -->
 
@@ -128,7 +151,7 @@
                 <!-- SLOGAN -->
 <div class="block-content background-primary background-map block-content-small-padding fullwidth">
     <div class="block-content-inner">
-        <h2 class="no-margin center caps">Only Real Estate Template You Will Ever Need</h2>
+        <h2 class="no-margin center caps">O que é Economia Compartilhada?</h2>
     </div><!-- /.block-content-iner -->
 </div><!-- /.block-content-->                <!-- ISOTOPE GRID -->
 <div class="block-content block-content-small-padding">
@@ -145,432 +168,12 @@
 
 <div class="properties-items">
 <div class="row">
-    <div class="property-item property-featured col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Jeopardy Ln</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Civic Betterment</a></h4>
-
-                <div class="property-box-label property-box-label-primary">Rent</div>
-                <!-- /.property-box-label -->
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 430 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/3.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>140</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-
-    <div class="property-item property-rent col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">McLaugh Ave</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Palo Alto, SA</a></h4>
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 1500 / month</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/4.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>309</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-
-    <div class="property-item property-sale col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Everett Ave</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Silicon Valley, SA</a></h4>
-
-                <div class="property-box-label">Sale</div>
-                <!-- /.property-box-label -->
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 430 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/2.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>233</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-
-    <div class="property-item property-rent col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Culver Blvd</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Kingman Park</a></h4>
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 145 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/6.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>334</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
+   
 </div>
 <!-- /.row -->
 
 <div class="row">
-    <div class="property-item property-featured col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Fife Ave</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Manhattan</a></h4>
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 350 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/8.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>3</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>3</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>283</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>3</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-
-    <div class="property-item property-sale col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Hansbury Ave</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Brooklyn</a></h4>
-
-                <div class="property-box-label property-box-label-primary">Rent</div>
-                <!-- /.property-box-label -->
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 145 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/7.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>3</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>161</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-sm-3">
-                        <strong>1</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-
-    <div class="property-item property-rent col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Bedford Ave</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Silicon Valley, SA</a></h4>
-
-                <div class="property-box-label property-box-label-primary">Rent</div>
-                <!-- /.property-box-label -->
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 545 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/1.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>3</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>222</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-
-    <div class="property-item property-sale col-sm-6 col-md-3">
-        <div class="property-box">
-            <div class="property-box-inner">
-                <h3 class="property-box-title"><a href="property-detail.html">Emerson Street</a></h3>
-                <h4 class="property-box-subtitle"><a href="property-detail.html">Kingman Park</a></h4>
-
-                <div class="property-box-label">Sale</div>
-                <!-- /.property-box-label -->
-
-                <div class="property-box-picture">
-                    <div class="property-box-price">$ 430 000</div>
-                    <!-- /.property-box-price -->
-                    <div class="property-box-picture-inner">
-                        <a href="property-detail.html" class="property-box-picture-target">
-                            <img src="assets/img/tmp/properties/medium/10.jpg" alt="">
-                        </a><!-- /.property-box-picture-target -->
-                    </div>
-                    <!-- /.property-picture-inner -->
-                </div>
-                <!-- /.property-picture -->
-
-                <div class="property-box-meta">
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>3</strong>
-                        <span>Baths</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>1</strong>
-                        <span>Beds</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>192</strong>
-                        <span>Area</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-
-                    <div class="property-box-meta-item col-xs-3 col-sm-3">
-                        <strong>2</strong>
-                        <span>Garages</span>
-                    </div>
-                    <!-- /.col-sm-3 -->
-                </div>
-                <!-- /.property-box-meta -->
-            </div>
-            <!-- /.property-box-inner -->
-        </div>
-        <!-- /.property-box -->
-    </div>
-    <!-- /.property-item -->
-</div>
+    
 <!-- /.row -->
 </div>
 <!-- /.properties-items -->
@@ -578,348 +181,9 @@
 </div>
 <!-- /.block-content-inner -->
 </div><!-- /.block-content -->                
-<!-- CAROUSEL -->
-<div class="block-content background-secondary background-map fullwidth">
-<div class="block-content-inner">
-<ul class="bxslider clearfix">
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">West Side</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Palo Alto, SA</a></h4>
-            <div class="property-box-label property-box-label-primary">Sale</div><!-- /.property-box-label -->
 
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/9.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
 
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">3117 Cozy River</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Needy, Jersey</a></h4>
 
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 1,200 <span class="property-box-price-suffix">/ month</span></div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/11.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">South St</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Civic Betterment</a></h4>
-            <div class="property-box-label property-box-label-primary">Rent</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 89,200</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/12.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">St Johns Pl</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Brooklyn</a></h4>
-            <div class="property-box-label property-box-label-primary">Sale</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/5.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">3117 Cozy River</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Needy, Jersey</a></h4>
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/10.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Jefferson Blvd</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Manhattan</a></h4>
-            <div class="property-box-label property-box-label-primary">Rent</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 89,200</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/3.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Evergreen Tr</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Manhattan</a></h4>
-            <div class="property-box-label property-box-label-primary">Sale</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/4.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">3117 Cozy River</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Needy, Jersey</a></h4>
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/1.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Everett Ave</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Silicon Valley, SA</a></h4>
-            <div class="property-box-label property-box-label-primary">Rent</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 89,200</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/2.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Evergreen Tr</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Brooklyn</a></h4>
-            <div class="property-box-label property-box-label-primary">Sale</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/9.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">3117 Cozy River</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Needy, Jersey</a></h4>
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/5.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Jefferson Blvd</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Civic Betterment</a></h4>
-            <div class="property-box-label property-box-label-primary">Rent</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 89,200</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/8.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Fife Ave</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Kingman Park</a></h4>
-            <div class="property-box-label property-box-label-primary">Sale</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/6.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">3117 Cozy River</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Needy, Jersey</a></h4>
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/7.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Jeopardy Ln</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Palo Alto, SA</a></h4>
-            <div class="property-box-label property-box-label-primary">Rent</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 89,200</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/12.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">Culver Blvd</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Silicon Valley, SA</a></h4>
-            <div class="property-box-label property-box-label-primary">Sale</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/11.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">3117 Cozy River</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Needy, Jersey</a></h4>
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 13,000</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/5.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-
-<li>
-    <div class="property-box no-border small">
-        <div class="property-box-inner">
-            <h3 class="property-box-title"><a href="#">West Side</a></h3>
-            <h4 class="property-box-subtitle"><a href="#">Palo Alto, SA</a></h4>
-            <div class="property-box-label property-box-label-primary">Rent</div><!-- /.property-box-label -->
-
-            <div class="property-box-picture">
-                <div class="property-box-price">$ 89,200</div><!-- /.property-box-price -->
-                <div class="property-box-picture-inner">
-                    <a href="#" class="property-box-picture-target">
-                        <img src="assets/img/tmp/properties/medium/10.jpg" alt="">
-                    </a><!-- /.property-box-picture-target -->
-                </div><!-- /.property-picture-inner -->
-            </div><!-- /.property-picture -->
-        </div><!-- /.property-box-inner -->
-    </div><!-- /.property-box -->
-</li>
-</ul>
-</div><!-- /.block-content-inner -->
-</div><!-- /.block-content -->                <!-- STATISTICS -->
 <div class="block-content block-content-small-padding">
     <div class="block-content-inner">
         <div class="center">
@@ -1211,11 +475,9 @@
     <div class="col-sm-9">
         <ul class="footer-nav nav nav-pills">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Properties</a></li>
-            <li><a href="#">Agents</a></li>
-            <li><a href="#">Agencies</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">Casas</a></li>
+            <li><a href="#">Vagas</a></li>
+            <li><a href="#">Sobre</a></li>
         </ul><!-- /.footer-nav -->
     </div>
 
@@ -1236,7 +498,7 @@
                 <div class="footer-bottom">
                     <div class="container">
                         <p class="center no-margin">
-                            &copy; 2014 Your Company, All Right reserved
+                            &copy; 2015 Estacione Aqui, Todos os direitos reservados
                         </p>
 
                         <div class="center">

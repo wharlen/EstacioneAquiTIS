@@ -26,7 +26,7 @@
 	                $("#lon").html(latlng.lng());
 	                placeMarker(latlng);
 	            } else {
-	                alert("Geocode was not successful for the following reason: " + status);
+	                alert("Geocodificamento não obteve sucesso pela seguinte razão " + status);
 	            }
 	        });   //geocoder
         }
@@ -51,7 +51,7 @@
 	<style type="text/css">
 		html,body { height: 100%; margin: 0px; padding: 0px; }
 		#map_canvas {
-			width:600px;
+			width:400px;
 			height:400px;
 		}
 		

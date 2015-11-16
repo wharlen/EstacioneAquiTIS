@@ -15,17 +15,14 @@
     include "includes/funcoes.php";
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
-?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?=$titulosys?></title>
+
+   include"includes/header_site.php";?>
         <?php
         //Incluindo arquivos para leitura de javascrript e CSS
             include "includes/js-jquery.php"; 
             include "includes/css.php"; 
             if($_GET['tipo']=='CS')
-
+            {
         ?>
         <script type="text/javascript">
             
@@ -49,10 +46,10 @@
             });
             
         </script>
-        <?php require"includes/maps_cadastro.php";?>
-    </head>
-    <body>
-        <div align="center">
+        <?php } require"includes/maps_cadastro.php";
+           include"includes/cabec_site.php";?>
+
+        <div class="container">
             <?php
             
             include "includes/menu.php";
@@ -300,5 +297,7 @@
             ?>
             
         </div>
+    </div>
+</div>
     </body>
 </html>

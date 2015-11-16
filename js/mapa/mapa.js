@@ -36,12 +36,22 @@ function carregarPontos() {
 			
 			var marker = new google.maps.Marker({
 				position: new google.maps.LatLng(jQuery.parseJSON(ponto.cs_latitude), jQuery.parseJSON(ponto.cs_longitude)),
-				title: "Meu ponto personalizado! :-D",
-				icon: 'img/marcador_small.png'
+				title: "Casa com"+"vagas",
+				icon: 'img/iconeazul.png'
 			});
-			
+			if(ponto.cs_seguro=="S")
+				var seguro = "Sim";
+			else
+				var seguro = "Não";
+			if(ponto.cs_animal=="S")
+				var animal = "Sim";
+			else
+				var animal = "Não";
+
 			var myOptions = {
-				content: "<p>" + ponto.cs_endereco + "</p>",
+				content: "<p>Endereço " + ponto.cs_endereco +", "+ ponto.cs_bairro+", "+ponto.cs_numero +" - "+ ponto.cs_cep+
+				"</p></br><p>Seguro:"+seguro+"</p><p>Animal:"+animal+"</p>"+"<p><a href='detalhes.php?tipo=CS&cod="
+				+ponto.cs_codigo+"'>Ver detalhes da vaga</a></p>",
 				pixelOffset: new google.maps.Size(-150, 0)
         	};
 

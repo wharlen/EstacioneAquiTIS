@@ -25,6 +25,10 @@ while($casa = $ib->obterDadosSQL($result))
   $lastx['pontos'][$i]['cs_codigo']   = $casa['cs_codigo'];
   $lastx['pontos'][$i]['cs_cep']   = $casa['cs_cep'];
   $lastx['pontos'][$i]['cs_endereco'] = $casa['cs_endereco'];
+  $lastx['pontos'][$i]['cs_numero'] = $casa['cs_numero'];
+  $lastx['pontos'][$i]['cs_bairro'] = $casa['cs_bairro'];
+  $lastx['pontos'][$i]['cs_seguro'] = $casa['cs_seguro'];
+  $lastx['pontos'][$i]['cs_animal'] = $casa['cs_animal'];
   $lastx['pontos'][$i]['cs_latitude'] = $casa['cs_latitude'];
   $lastx['pontos'][$i]['cs_longitude'] = $casa['cs_longitude'];
 
