@@ -10,8 +10,6 @@
     include "includes/funcoes.php";
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";?>
-    <?php include"includes/header_site.php";
-        include"includes/cabec_site.php";?>
 <?php include"includes/header_site.php";?>
 <?php include "includes/maps-ver.php";?>
 <?php include "includes/cabec_site.php";?>

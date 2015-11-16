@@ -10,11 +10,9 @@
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?=$titulosys?></title>
+
         <?php
+        include "includes/header_site.php";
         //Incluindo arquivos para leitura de javascrript e CSS
             include "includes/js-jquery.php"; 
             include "includes/css.php"; 
@@ -32,14 +30,32 @@
             });
             
         </script>
-    </head>
-    <body>
-        <div align="center">
+            <style type="text/css">
+        html,body { height: 100%; margin: 0px; padding: 0px; }
+        #map_canvas {
+            width:100%;
+            height:400px;
+        }
+        
+        .text 
+        {
+            border:1px solid black;
+            width:300px;
+        }
+        label 
+        {
+            width:100px;
+        }
+    </style>
+        <?php include"includes/cabec_site.php";?>
+<div id="main-wrapper">
+   <div id="main">
+        <div id="main-inner">
+            <div class="container">
+                <div class="block-content block-content-small-padding">
+                <div class="block-content-inner">
             <?php
-            
-            include "includes/menu.php";
-            
-            
+
             if(isset($_GET)){
              
             $botaovoltar =  input_form("button", "","","Voltar",array("onclick"=>"window.location.href='index.php'",
@@ -108,26 +124,54 @@
                 
                     $dados = $ib->obterDadosSQL($ib->executarSQL($cs->buscar("",$_GET['cod'])));
                     ?>
-                <h3 class="titulo1">Editar dados da Casa:</h3>
-            <div class="container1">    
+                <h2>Editar dados da Casa:</h2>
+            <div class="box">
+        <div class="row">
+            <div class="col-sm-6">    
                 <?= abrir_form("post", "casa", "atualizar.php?tipo=CS", "return validaCasa(this, 'E');")?>
-                <table>
-                    <tr><td>CEP:*</td><td><?= input_form("", "cep","cep",$dados['cs_cep'],"size='12' onblur='javascript: pesquisacep(this.value);'")?></td></tr>
-                    <tr><td>Rua/Avenida:*</td><td><?= input_form("", "endereco","endereco",$dados['cs_endereco'],"size='26'")?>&nbsp;&nbsp;&nbsp;Nº:*&nbsp;<?= input_form("", "numero","",$dados['cs_numero'],"size='5' onkeyup='mascara(this,\"9999\");' onkeypress='mascara(this,\"9999\");' ")?></td></tr>
-                    <tr><td>Bairro:*</td><td><?= input_form("", "bairro","bairro",$dados['cs_bairro'],"size='16'")?></td></tr>
-                    <tr><td>Cidade:*</td><td><?= input_form("", "cidade","cidade",$dados['cs_cidade'],"size='16'")?></td></tr>
-                    <tr><td>Estado (UF):*</td><td><?= input_form("", "estado","estado",$dados['cs_estado'],"size='5' onkeyup='mascara(this,\"LL\");' onkeypress='mascara(this,\"LL\");' ")?></td></tr>
-                    <tr><td>Possui Seguro ?</td><td>
+                <div class="form-group">
+                    <label>CEP:*</label><?= input_form("", "cep","cep",$dados['cs_cep'],"size='12' onblur='javascript: pesquisacep(this.value);'")?></div>
+                    <div class="form-group">
+                    <label>Rua/Avenida:*</label><?= input_form("", "endereco","endereco",$dados['cs_endereco'],"size='26'")?>&nbsp;&nbsp;&nbsp;Nº:*&nbsp;<?= input_form("", "numero","",$dados['cs_numero'],"size='5' onkeyup='mascara(this,\"9999\");' onkeypress='mascara(this,\"9999\");' ")?></div>
+                    <div class="form-group">
+                    <label>Bairro:*</label><?= input_form("", "bairro","bairro",$dados['cs_bairro'],"size='16'")?></div>
+                    <div class="form-group">
+                    <label>Cidade:*</label><?= input_form("", "cidade","cidade",$dados['cs_cidade'],"size='16'")?></div>
+                    <div class="form-group">
+                    <label>Estado (UF):*</label><?= input_form("", "estado","estado",$dados['cs_estado'],"size='5' onkeyup='mascara(this,\"LL\");' onkeypress='mascara(this,\"LL\");' ")?></div>
+                    <div class="form-group">
+                    <label>Possui Seguro ?</label>
                     <?= input_form("radio", "seguro","","S", ($dados['cs_seguro'] == 'S'?"checked":""))?>Sim&nbsp;
-                    <?= input_form("radio", "seguro","","N", ($dados['cs_seguro'] == 'N'?"checked":""))?>Não</td></tr>
-                    <tr><td>Há presença de Animal na casa ?</td><td>
+                    <?= input_form("radio", "seguro","","N", ($dados['cs_seguro'] == 'N'?"checked":""))?>Não</div>
+                     <div class="form-group"><label>Há presença de Animal na casa ?</label>
                     <?= input_form("radio", "animal","","S", ($dados['cs_animal'] == 'S'?"checked":""))?>Sim&nbsp;
-                    <?= input_form("radio", "animal","","N", ($dados['cs_animal'] == 'N'?"checked":""))?>Não</td></tr>
-                    <tr><td>&nbsp;<?= input_form("hidden", "codigo","",$dados['cs_codigo'])?></td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;</td></tr>
+                    <?= input_form("radio", "animal","","N", ($dados['cs_animal'] == 'N'?"checked":""))?>Não</div>
+                     <div class="form-group">&nbsp;<?= input_form("hidden", "codigo","",$dados['cs_codigo'])?>
+                    <label><small>(<b>*</b>) Campos Obrigatórios</small></label></div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Procurar no mapa: </label>
+                    <?= input_form("", "latitude","latitude",$dados['cs_latitude'],"size='20' class=\"lat\"")?>
+                    <?= input_form("", "longitude","longitude",$dados['cs_longitude'],"size='20'")?>
+                    
+                    <input id="txtAddress" type="text" class="text" value=""/> <input type="button" id="btnGo" value="Procurar" />
+                
+                </div>
+                <div class="form-group">
+                 <div id="map_canvas" width="100%" height="250px">
+                    </div>
+                     <?php require"includes/maps_edicao.php";?>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0X4v7eqMFcWCR-VZAJwEMfb47id9IZao&signed_in=true&callback=initMap"
+        async defer></script>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                 <div class="form-group">
                     <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
-                </table>
+                </div>
+            </div>
                 <?= fecha_form() ?>
             </div>
                 <?php 
@@ -165,6 +209,13 @@
             $ib->fecharBanco();
             ?>
             
+                     </div>
+                    </div>
+                 </div>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

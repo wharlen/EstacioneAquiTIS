@@ -109,7 +109,7 @@
                      <div class="form-group">
                     <label><small>(<b>*</b>) Campos Obrigatórios</small></label>
                     
-                    <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
+                    <tr><td colspan="2"><?= input2_form("button", "","","Cadastrar",array("class" => "btn btn-success","style" => "margin:auto"))?> <?=$botaovoltar?></td></tr>
                 </div>
                 <?= fecha_form() ?>
             </div>
@@ -160,7 +160,7 @@
                     <label>(<b>*</b>) Campos Obrigatórios</small></label>
                     </div>
                    <div class="form-group">
-                    <?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
+                    <?= input2_form("button", "","","Cadastrar",array("class" => "btn btn-success","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
                  <div class="form-group">
                  <div id="map_canvas" width="100%" height="250px">
                     </div>

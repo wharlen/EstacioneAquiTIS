@@ -492,6 +492,23 @@ function input_form($tipo, $nome = '', $id = '', $valor = '', $atr = '') {
     $input .= "/>";
     return $input;
 }
+//BUTTON PARA BOOTSTRAP
+function input2_form($tipo, $nome = '', $id = '', $valor = '', $atr = '') {
+    $input = "<button ".($tipo != '' ? "type='$tipo' " : "type='text' ").($nome != '' ? "name='$nome' " : "")
+            .($id != '' ? "id='$id' " : "").($valor != '' ? "value='$valor' " : "");
+    
+    if (is_array($atr)) {
+        foreach ($atr as $a => $b) {
+            $vlr = str_replace("'", "\"", $b);
+            $input .= $a . "='" . $vlr . "' ";
+        }
+    }else{
+        $input .= $atr." ";
+    }
+    
+    $input .= "/>".$valor."</button>";
+    return $input;
+}
 
 function select_form($nome, $values, $id="", $classe="", $atr=""){
     $select = "<select name='$nome'>";

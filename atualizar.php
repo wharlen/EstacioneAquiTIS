@@ -95,6 +95,8 @@ if (isset($_POST)) {
             $cs->setSeguro($_POST['seguro']);
             $cs->setAnimal($_POST['animal']);
             $cs->setCodigo($_POST['codigo']);
+            $cs->setLatitude($_POST['latitude']);
+            $cs->setLongitude($_POST['longitude']);
         } catch (Exception $e) {
             header("location: mensagens.php?m=3");
             exit;
@@ -107,7 +109,9 @@ if (isset($_POST)) {
                     "cs_cidade" => $cs->getCidade(),
                     "cs_estado" => $cs->getEstado(),
                     "cs_seguro" => $cs->getSeguro(),
-                    "cs_animal" => $cs->getAnimal()
+                    "cs_animal" => $cs->getAnimal(),
+                    "cs_latitude" => $cs->getLatitude(),
+                    "cs_longitude" => $cs->getLongitude()
                         ), $cs->getCodigo()));
         header("location: mensagens.php?m=17&t=CS");
         exit;

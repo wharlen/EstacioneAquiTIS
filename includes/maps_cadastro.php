@@ -4,9 +4,9 @@
 <script type="text/javascript">
 	    var map;
 	    $(document).ready(function () {
-	        var latlng = new google.maps.LatLng(40.748492, -73.985496);
+	        var latlng = new google.maps.LatLng(-19.8157, -43.9542);
 	        var myOptions = {
-	            zoom: 15,
+	            zoom: 11,
 	            center: latlng,
 	            mapTypeId: google.maps.MapTypeId.ROADMAP
 	        };

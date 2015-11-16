@@ -19,9 +19,12 @@
     include"includes/cabec_site.php";
     ?>
 
-    </head>
-    <body>
-        <div class="container">
+<div id="main-wrapper">
+   <div id="main">
+        <div id="main-inner">
+            <div class="container">
+                <h3>Endereço no mapa </h3>
+                <div class="box">   
             <?php
             $cod = $_GET['cod'];
              $cs = new Casa();
@@ -32,16 +35,18 @@
                 $casa = $ib->obterDadosSQL($result); ?>
 <table><tr><td colspan="5">
                         <div>
-                    <label>Endereço no mapa : </label>
+                    
                     <input id="txtAddress" type="hidden" class="text" value="<?=$casa['cs_endereco']?>,<?=$casa['cs_bairro']?>,<?=$casa['cs_cidade']?>,<?=$casa['cs_estado']?>" />
                         </div>
                         <div id="map_canvas">
                         </div>
-                        <!--main-->
-                        <div id="map_cord"></div>
+                 
                     </td></tr>
 </table>
-<?php }?>
-</div>
+<?php }?>           </div>
+                 </div>
+             </div>
+        </div>
+    </div>
 </body>
     </html>

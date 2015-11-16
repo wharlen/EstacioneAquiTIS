@@ -10,7 +10,7 @@
         <div class="header-top">
             <div class="container">
                 <div class="header-identity">
-                    <a href="index.html" class="header-identity-target">
+                    <a href="principal.php" class="header-identity-target">
                         <img src="img/map_icon.png">
                         <span class="header-slogan">Garagem Compartilhada<br>Economia Compartilhada</span><!-- /.header-slogan -->
                     </a><!-- /.header-identity-target-->

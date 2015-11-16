@@ -19,7 +19,12 @@
         
         include"includes/cabec_site.php";?> 
 
-        <div class="container">
+<div id="main-wrapper">
+   <div id="main">
+        <div id="main-inner">
+            <div class="container">
+               
+                
             <?php
             //incluindo arquivo de menus
             include "includes/menu.php";
@@ -30,16 +35,16 @@
             //Galeria de Veiculo    
             if($_GET['tipo'] == "VC"){ 
                 
-                echo "<h2 class='titulo1'>Meus Veiculos</h2>";
+                echo "<h2>Meus Veiculos</h2>";
            ?>
-            <div class="container1">    
+            <div class="box">    
                 <?php     
                 $vc = new Veiculo();
                 $result = $ib->executarSQL($vc->buscar("",array("vc_usuario"=>$_SESSION['codigo_usuario']),"!E","vc_marca"));
                 $nl = $ib->obterQtdeSQL($result);
                 if($nl != 0){
-                    ?><div>
-            <table border="1"  class='tabela1'>
+                    ?>
+            <table class='table-striped table-bordered'>
                 <thead>
                 <tr>
                     <th width="25%">Marca</th>
@@ -60,9 +65,9 @@
                     <td><?=$veiculo['vc_cor']?></td>
                     <td><?=$veiculo['vc_ano']?></td>
                     <td>
-                        <a href="visualizar.php?tipo=VC&cod=<?=$veiculo['vc_codigo']?>" title="Visualizar"><img src="img/visualizar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="edicao.php?tipo=VC&cod=<?=$veiculo['vc_codigo']?>"><img src="img/editar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="javascript: validaExclusao('<?=$veiculo['vc_codigo']?>', 'VC');" title="Excluir"><img src="img/excluir.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
+                        <a href="visualizar.php?tipo=VC&cod=<?=$veiculo['vc_codigo']?>" title="Visualizar"><span class="glyphicon glyphicon-search"></span></a>
+                        <a href="edicao.php?tipo=VC&cod=<?=$veiculo['vc_codigo']?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="javascript: validaExclusao('<?=$veiculo['vc_codigo']?>', 'VC');" title="Excluir"><span class="glyphicon glyphicon-remove"></span></a>
                  
                     </td>
                 </tr></tbody>
@@ -83,16 +88,16 @@
                 //Galeria de Casa
                 }elseif($_GET['tipo'] == "CS"){ 
                 
-                    echo "<h2 class='titulo1'>Minhas Casas</h2>";
+                    echo "<h2>Minhas Casas</h2>";
                 ?>
-            <div class="container1">    
+            <div class="box">    
                 <?php       
                 $cs = new Casa();
                 $result = $ib->executarSQL($cs->buscar("",array("cs_usuario"=>$_SESSION['codigo_usuario'], "cs_bloqueado"=>"!S"),"!E","cs_cidade"));
                 $nl = $ib->obterQtdeSQL($result);
                 if($nl != 0){
-                    ?><div>
-            <table border="1" class='tabela1'>
+                    ?>
+            <table class="table-striped table-bordered">
                 <thead><tr>
                     <th width="35%">Endereco</th>
                     <th width="25%">Bairro</th>
@@ -109,10 +114,10 @@
                     <td><?=$casa['cs_cidade']?></td>
                     <td><?=$casa['cs_estado']?></td>
                     <td>
-                        <a href="visualizar.php?tipo=CS&cod=<?=$casa['cs_codigo']?>" title="Visualizar"><img src="img/visualizar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="edicao.php?tipo=CS&cod=<?=$casa['cs_codigo']?>"><img src="img/editar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="javascript: validaExclusao('<?=$casa['cs_codigo']?>','CS');" title="Excluir"><img src="img/excluir.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="ver_no_mapa.php?tipo=CS&cod=<?=$casa['cs_codigo']?>" title="Ver no Mapa">Ver no mapa</a>
+                        <a href="visualizar.php?tipo=CS&cod=<?=$casa['cs_codigo']?>" title="Visualizar"><span class="glyphicon glyphicon-search"></span></a>
+                        <a href="edicao.php?tipo=CS&cod=<?=$casa['cs_codigo']?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="javascript: validaExclusao('<?=$casa['cs_codigo']?>','CS');" title="Excluir"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="ver_no_mapa.php?tipo=CS&cod=<?=$casa['cs_codigo']?>" title="Ver no Mapa"><span class="glyphicon glyphicon-map-marker"></span></a>
                     </td>
                     </tr></tbody>
                   
@@ -358,8 +363,13 @@
                 $ib->fecharBanco();
             }
             ?>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </body>
+</body>
 </html>
