@@ -15,6 +15,7 @@
 
 	    });
 
+
 	    function getLatLangFromAddress(address) {
 	        var geocoder;
 	        geocoder = new google.maps.Geocoder();
@@ -43,6 +44,7 @@
 
             var marker = new google.maps.Marker({
                 position: location,
+                icon: 'img/iconeazul.png',
                 map: map
             });
 

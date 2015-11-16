@@ -1,3 +1,15 @@
+    <?php 
+ if(isset($_GET['login']))
+    require "includes/sessao.php";
+
+     //incluindo arquivo de conexao ao banco
+    require "includes/database.php";
+    //incluindo arquivo de Classes/Modelos de dados
+    require "includes/modelo.php";
+    //incluindo arquivo de funções auxiliares
+    include "includes/funcoes.php";
+    //incluindo arquivo de titulo da pagina
+    include "includes/configsys.php";?>
     <?php include"includes/header_site.php";
         include"includes/cabec_site.php";?>
 
@@ -156,68 +168,47 @@
 </div><!-- /.block-content-->                <!-- ISOTOPE GRID -->
 <div class="block-content block-content-small-padding">
 <div class="block-content-inner">
-<h2 class="center">Best Rated Properties</h2>
-
-<ul class="properties-filter">
-    <li class="selected"><a href="#" data-filter="*"><span>All</span></a></li>
-    <li><a href="#" data-filter=".property-featured"><span>Featured</span></a></li>
-    <li><a href="#" data-filter=".property-rent"><span>Rent</span></a></li>
-    <li><a href="#" data-filter=".property-sale"><span>Sale</span></a></li>
-</ul>
-<!-- /.property-filter -->
-
-<div class="properties-items">
 <div class="row">
-   
+  <h2 class="center"> ENTENDENDO O CONCEITO: O QUE É ECONOMIA COMPARTILHADA?</h2>
+
+<p>Foi em meio a crise de 2008 que, segundo o colunista do New York Times, Thomas Friedman, tanto a mãe natureza quanto o mercado chegaram a um limite e declararam que o modelo hiper consumista em vigência não era mais sustentável. Alguns fatores chave conduziram esse novo modelo econômico: as preocupações ambientais, a recessão global, as tecnologias e redes sociais e a redefinição do sentido de comunidade.
+</p>
+<p>Segundo a especialista Rachel Botsman, a economia compartilhada contempla 3 possíveis tipos de sistemas:</p>
+
+<ul><li>Mercados de redistribuição: ocorre quando um item usado passa de um local onde ele não é mais necessário para onde ele é. Baseia-se no princípio do “reduza, re-use, recicle, repare e redistribua”.
+</li><li>Lifestyles colaborativos: baseia-se no compartilhamento de recursos, tais como dinheiro, habilidades e tempo.</li>
+<li>Sistemas de produtos e serviços: ocorre quando o consumidor paga pelo benefício do produto e não pelo produto em si. Tem como base o princípio de que aquilo que precisamos não é um CD e sim a música que toca nele, o que precisamos é um buraco na parede e não uma furadeira, e se aplica a praticamente qualquer bem.</li></ul>
+<p>A economia compartilhada permite que as pessoas mantenham o mesmo estilo de vida, sem precisar adquirir mais, o que impacta positivamente não só no bolso mas também na sustentabilidade do planeta.
+</p>
 </div>
 <!-- /.row -->
 
 <div class="row">
-    
-<!-- /.row -->
-</div>
-<!-- /.properties-items -->
+<h2 class="center">COMO A ECONOMIA COMPARTILHADA AFETA A NOSSA ECONOMIA?</h2>
+
+<p>A base fundamental do capitalismo é acumular a maior quantidade possível de bens. A indústria e tudo que a envolve corroboram isso. A publicidade é feita para nos criar desejos, precisamos ter para ser. Os bens são feitos para não durar, modelos novos de eletrônicos são lançados ano a ano tornando nossos produtos recém adquiridos obsoletos, no famoso ciclo da “obsolescência programada”. As empresas lucram quando compramos mais, a economia gira quando compramos mais, somos mais quando compramos mais.<p/>
+<p>Pensemos na Ride With, a nova funcionalidade do Waze que facilita caronas. Se as pessoas não precisam mais ter seus próprios carros para se locomover, como fica a indústria automobilística? Qual o impacto para toda essa cadeia: fornecedores, oficinas mecânicas, postos de gasolina, seguradoras…? E para todas as pessoas que trabalham em qualquer ponto dessa cadeia?</p>
+<p>A indústria entra em colapso, o faturamento das empresas cai, o desemprego aumenta, leis são criadas para frear esse movimento, empresas tradicionais se revoltam com a concorrência desleal… Não é isso que temos acompanhado nos últimos tempos? A economia colaborativa nos apresenta um novo jeito de consumir focado no usufruir (serviço) substituindo o paradigma da posse do bem (produto).</p>
+
+<p>Se avaliarmos a economia colaborativa com uma mentalidade tradicional não seremos capazes de enxergar a quantidade de oportunidades que despontam nesse novo cenário. Segundo a Forbes, a estimativa é que a economia colaborativa gere uma receita anual de US$3,5 bilhões para os usuários, valor que deve crescer 25% ao ano. Analistas econômicos ainda não incorporam em suas análises o impacto econômico dessa rede colaborativa e há espaço não só para startups mas também para grandes empresas.</p>
+
+<p>Investimentos diretos, aquisições, parcerias e até mudança em seu modelo de negócio são algumas formas que grandes empresas como Avis, GM e Google tem encontrado para ir ao encontro e não na contramão do fenômeno. A gigante DHL, empresa de logística, viu seu faturamento cair e para se reerguer lançou o aplicativo My Ways, capaz de conectar remetentes e destinatários, possibilitando que os próprios clientes fizessem o transporte das encomendas.
+
+A despeito da análise de alguns economistas, empresas grandes, pequenas e até indivíduos podem aumentar seu faturamento e encontrar possibilidades de sobreviver à crise através da economia do compartilhamento.
+</p>
+<h2>UMA NOVA FORMA DE SE RELACIONAR</h2>
+
+<p>A economia do compartilhamento está mudando não só o modo como entendemos oferta e demanda e a nossa relação com os bens materiais, mas também nossas relações pessoais.
+
+É como se a tecnologia que em algum momento nos afastou, agora estivesse nos colocando de volta para um movimento em que nos comportamos como uma vila, porém com laços que acontecem em escala global. A reputação volta a ter uma importância outrora esquecida, os nossos valores mudam e conhecer pessoas no meio desse caminho torna a experiência ainda melhor.
+
+De tempos em tempos novas revoluções emergem, revoluções capazes de mudar tudo, do modo como trabalhamos ao modo como nos relacionamos. Estamos no centro de uma mudança de era e qualquer reflexão feita hoje, pode fazer menos sentido amanhã. Por isso, para não insistirmos em modelos obsoletos o melhor é enxergar as oportunidades que a economia do compartilhamento nos dá para não só sobrevivermos, como sairmos ainda melhores das crises econômicas que vem colocando em xeque o modo como entendemos mercados e a economia.
+</p>
 
 </div>
 <!-- /.block-content-inner -->
 </div><!-- /.block-content -->                
 
-
-
-<div class="block-content block-content-small-padding">
-    <div class="block-content-inner">
-        <div class="center">
-            <h2 class="color-primary">Over 10 000 Properties In Our Directory</h2>
-        </div><!-- /.center -->
-
-        <div class="row">
-            <div class="col-sm-2 col-sm-offset-2">
-                <div class="block-stats background-dots background-primary color-white">
-                    <strong>3500+</strong>
-                    <span>Apartments</span>
-                </div><!-- /.block-stats -->
-            </div>
-            <div class="col-sm-2">
-                <div class="block-stats background-dots background-primary color-white">
-                    <strong>3000+</strong>
-                    <span>Houses</span>
-                </div><!-- /.block-stats -->
-            </div>
-            <div class="col-sm-2">
-                <div class="block-stats background-dots background-primary color-white">
-                    <strong>5000+</strong>
-                    <span>Condos</span>
-                </div><!-- /.block-stats -->
-            </div>
-            <div class="col-sm-2">
-                <div class="block-stats background-dots background-primary color-white">
-                    <strong>2500+</strong>
-                    <span>Areas</span>
-                </div><!-- /.block-stats -->
-            </div>
-        </div><!-- /.row -->
-    </div><!-- /.block-content-inner -->
-</div><!-- /.block-content -->                <!-- HEXS -->
 <div class="block-content fullwidth background-primary background-map clearfix">
     <div class="block-content-inner row">
         <div class="hex-wrapper col-sm-4 center">

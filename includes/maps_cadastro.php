@@ -46,6 +46,7 @@
 
             var marker = new google.maps.Marker({
                 position: location,
+                icon: 'img/iconeazul.png',
                 map: map
             });
 

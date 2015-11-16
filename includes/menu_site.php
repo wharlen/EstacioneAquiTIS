@@ -54,20 +54,10 @@
                 <li><a href="sair.php?sair=1">Sair</a></li></ul>
     </li>
     <?php endif;?>
-<li class="menuparent"><a href="">Contato</li></a>
-<li class="menuparent"><a href="">Sobre</li></a>
+<li class="menu"><a href="contato.php">Contato</li></a>
+<li class="menu"><a href="sobre.php">Sobre</li></a>
 </ul><!-- /.header-nav -->
-                    <div class="form-search-wrapper col-sm-3">
-                        <form method="post" action="?" class="form-horizontal form-search">
-                            <div class="form-group has-feedback no-margin">
-                                <input type="text" class="form-control" placeholder="Search">
 
-                                <span class="form-control-feedback">
-                                    <i class="fa fa-search"></i>
-                                </span><!-- /.form-control-feedback -->
-                            </div><!-- /.form-group -->
-                        </form>
-                    </div>
                 </div>
             </div><!-- /.container -->
         </div><!-- /.header-navigation -->

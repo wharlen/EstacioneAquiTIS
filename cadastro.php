@@ -1,5 +1,5 @@
 <?php
-    if(isset($_GET["tipo"])){
+   if(isset($_GET["tipo"])){
         if($_GET['tipo'] != "US"){
             require "includes/sessao.php";
             
@@ -16,8 +16,8 @@
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
 
-   include"includes/header_site.php";?>
-        <?php
+   include"includes/header_site.php";
+
         //Incluindo arquivos para leitura de javascrript e CSS
             include "includes/js-jquery.php"; 
             include "includes/css.php"; 
@@ -25,7 +25,6 @@
             {
         ?>
         <script type="text/javascript">
-            
                $("#botaoscasa").click(function(){
                    if($("#casadavaga").val() != ""){
                        $("#inserirvaga").show();
@@ -42,19 +41,17 @@
                $("#horai, #horaf").mask("99:99");
                $("#telefone").mask("(99) 9999-9999");
                $("#ano").mask("9999");
-               $("#placa").mask("aaa-9999");
-            });
-            
+               $("#placa").mask("aaa-9999");      
         </script>
         <?php } require"includes/maps_cadastro.php";
            include"includes/cabec_site.php";?>
-
-        <div class="container">
+<div id="main-wrapper">
+   <div id="main">
+        <div id="main-inner">
+            <div class="container">
+                <div class="block-content block-content-small-padding">
+                <div class="block-content-inner">
             <?php
-            
-            include "includes/menu.php";
-            
-            
             if(isset($_GET)){
              
             $botaovoltar =  input_form("button", "","","Voltar",array("onclick"=>"window.location.href='index.php'",
@@ -90,69 +87,84 @@
             
             //Cadastro de Veiculo
             } elseif($_GET['tipo'] == "VC"){ ?>
-                <h3 class="titulo1">Cadastre seu Veiculo</h3>
-            <div class="container1">    
+                <h2>Cadastrar Veiculo</h2>
+            <div class="box">     
                 <?= abrir_form("post", "veiculo", "salvar.php?tipo=VC", "return validaVeiculo(this,'C');")?>
-                <table>
-                    <tr><td>Marca:*</td><td><?= input_form("", "marca","","","size='18' ")?></td></tr>
-                    <tr><td>Modelo:*</td><td><?= input_form("", "modelo","","","size='23'")?></td></tr>
-                    <tr><td>Cor:*</td><td><?= input_form("", "cor","","","size='12'")?></td></tr>
-                    <tr><td>Ano:*</td><td><?= input_form("", "ano","ano","","size='3'")?></td></tr>
-                    <tr><td>Placa:*</td><td><?= input_form("", "placa","placa","","size='7'")?></td></tr>
-                    <tr><td>Carroceria(Tamanho):</td><td>
-                    <?= input_form("radio", "carroceria","","P")?>Pequeno&nbsp;
+                <div class="form-group">
+                    <label>Marca:*</label><?= input_form("", "marca","","","size='18' ")?></div>
+                    <div class="form-group">
+                    <label>Modelo:*</label><?= input_form("", "modelo","","","size='23'")?></div>
+                     <div class="form-group">
+                    <label>Cor:*</label><?= input_form("", "cor","","","size='12'")?></div>
+                    <div class="form-group">
+                    <label>Ano:*</label><?= input_form("", "ano","ano","","size='3'")?></div>
+                     <div class="form-group">
+                    <label>Placa:*</label><?= input_form("", "placa","placa","","size='7'")?></div>
+                    <div class="form-group">
+                    <label>Carroceria(Tamanho):</label>
+                    <div class="form-group"><?= input_form("radio", "carroceria","","P")?>Pequeno&nbsp;
                     <?= input_form("radio", "carroceria","","M","checked")?>Médio&nbsp;
-                    <?= input_form("radio", "carroceria","","G")?>Grande</td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;</td></tr>
+                    <?= input_form("radio", "carroceria","","G")?>Grande</div></div>
+                  <hr/>
+                     <div class="form-group">
+                    <label><small>(<b>*</b>) Campos Obrigatórios</small></label>
+                    
                     <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
-                </table>
+                </div>
                 <?= fecha_form() ?>
             </div>
+
                 <?php 
                 
                 //Cadastro de Casa
             }elseif($_GET['tipo'] == "CS"){ ?>
-                <h3 class="titulo1">Cadastre uma Casa:</h3>
-            <div class="container1">    
+                <h2>Cadastrar Casa:</h2>
+            <div class="box">    
                 <?= abrir_form("post", "casa", "salvar.php?tipo=CS", "return validaCasa(this,'C');")?>
-                <table>
-                    <tr><td>CEP:*</td><td><?= input_form("", "cep","cep","","size='12' onblur='javascript: pesquisacep(this.value);'")?></td></tr>
-                    <tr><td>Rua/Avenida:*</td><td><?= input_form("", "endereco","endereco","","size='31'")?>&nbsp;&nbsp;&nbsp;Nº:*&nbsp;<?= input_form("", "numero","numero","","size='5' onkeyup='mascara(this,\"9999\");' onkeypress='mascara(this,\"9999\");' ")?></td></tr>
-                    <tr><td>Bairro:*</td><td><?= input_form("", "bairro","bairro","","size='20'")?></td></tr>
-                    <tr><td>Cidade:*</td><td><?= input_form("", "cidade","cidade","","size='16'")?></td></tr>
-                    <tr><td>Estado (UF):*</td><td><?= input_form("", "estado","estado","","size='5' onkeyup='mascara(this,\"LL\");' onkeypress='mascara(this,\"LL\");' ")?></td></tr>
-                    <tr><td>Possui Seguro ?</td><td>
+                <div class="form-group">
+                    <label>CEP:*</label><?= input_form("", "cep","cep","","size='12' onblur='javascript: pesquisacep(this.value);'")?></div>
+                    <div class="form-group">
+                    <label>Rua/Avenida:*</label><?= input_form("", "endereco","endereco","","size='31'")?>&nbsp;&nbsp;&nbsp;Nº:*&nbsp;<?= input_form("", "numero","numero","","size='5' onkeyup='mascara(this,\"9999\");' onkeypress='mascara(this,\"9999\");' ")?></div>
+                    <div class="form-group">
+                    <label>Bairro:*</label><?= input_form("", "bairro","bairro","","size='20'")?></div>
+                    <div class="form-group">
+                    <label>Cidade:*</label><?= input_form("", "cidade","cidade","","size='16'")?></div>
+                    <div class="form-group">
+                    <label>Estado (UF):*</label><?= input_form("", "estado","estado","","size='5' onkeyup='mascara(this,\"LL\");' onkeypress='mascara(this,\"LL\");' ")?></div>
+                    <div class="form-group">
+                    <label>Possui Seguro ?</label>
                     <?= input_form("radio", "seguro","","S")?>Sim&nbsp;
-                    <?= input_form("radio", "seguro","","N","checked")?>Não</td></tr>
-                    <tr><td>Há presença de Animal na casa ?</td><td>
+                    <?= input_form("radio", "seguro","","N","checked")?>Não</div>
+                    <div class="form-group">
+                    <label>Há presença de Animal na casa ?</label>
                     <?= input_form("radio", "animal","","S")?>Sim&nbsp;
-                    <?= input_form("radio", "animal","","N","checked")?>Não</td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td>Qual será o seu pacote ?</td><td>
+                    <?= input_form("radio", "animal","","N","checked")?>Não</div>
+                    <hr/>
+                    <div class="form-group">
+                    <label>Qual será o seu pacote ?</label>
                     <?= input_form("radio", "pacote","","15d","checked")?>15 dias: R$15,00&nbsp;
                     <?= input_form("radio", "pacote","","30d")?>30 dias: R$30,00&nbsp;
                     <?= input_form("radio", "pacote","","6m")?>aprox. 6 meses: R$182,00&nbsp;
                     <?= input_form("radio", "pacote","","1a")?>1 ano: R$365,00&nbsp;
-                    </td></tr>
+                    </div>
                     
-                    <tr><td>
+                    <div class="form-group">
                     <label>Procurar no mapa: </label>
-                    <?= input_form("", "latitude","latitude","","size='20' class=\"lat\"")?>
-                    <?= input_form("", "longitude","longitude","","size='20'")?>
-                    </td>
-                    <td>
+                    <?= input_form("hidden", "latitude","latitude","","size='20' class=\"lat\"")?>
+                    <?= input_form("hidden", "longitude","longitude","","size='20'")?>
+                    
                     <input id="txtAddress" type="text" class="text" value=""/> <input type="button" id="btnGo" value="Procurar" />
                     <span id="spnCoordinates" style="color:Green;font-weight:bold;"></span>
-                    </td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
-                </table>
+                    </div>
+                    <div class="form-group">
+                    <label>(<b>*</b>) Campos Obrigatórios</small></label>
+                    </div>
+                   <div class="form-group">
+                    <?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
+                 <div class="form-group">
                  <div id="map_canvas" width="100%" height="250px">
                     </div>
+                </div>
                 <?= fecha_form() ?>
             </div>
                 <?php 
@@ -161,12 +173,10 @@
             }elseif($_GET['tipo'] == "VG"){ 
                    
                     ?>
-                <h3 class="titulo1">Adicionar vaga para uma casa:</h3>
-            <div class="container1">    
+                <h2>Adicionar vaga para uma casa:</h2>
+            <div class="box">    
                 <?= abrir_form("post", "vaga", "salvar.php?tipo=VG", "return validaVaga(this,'C');")?>
-                <table >
-                    <tr>
-                        <td>Escolha a Casa</td>
+                   <label>Escolha a Casa</label>
                         <?php
                         $cs = new Casa();
                         $rst = $ib->executarSQL($cs->buscar(
@@ -174,33 +184,30 @@
                                 array("cs_usuario"=>$_SESSION['codigo_usuario'])
                                 ));
                         ?>
-                                <td><select id="casadavaga" name="casaselect">
+                                <div class="form-group"><select id="casadavaga" name="casaselect">
                                         <option value=""> ---- Selecione a casa ---- </option>
                             <?php
                             while($casa = $ib->obterDadosSQL($rst)){
                                 echo "<option value='".$casa['cs_codigo']."'>".$casa['cs_endereco']."</option>";
                             }
                             ?>
-                            </select></td>
-                        <td><input type="button" id="botaoscasa" value="Adicionar" class="botao01"></td>
-                    </tr>
-                    
-                </table><br><br>
-                <table id="inserirvaga" style="display:none">
-                    <tr><td>Descrição da vaga:</td><td><?= input_form("", "descricao")?></td></tr>
-                    <tr><td>Tipo:*</td><td>
+                            </select></div>
+                        <div class="form-group"><input type="button" id="botaoscasa" value="Adicionar" class="botao01"></div>
+                
+                <div id="inserirvaga" style="display:none">
+                     <div class="form-group"><label>Descrição da vaga:</label><?= input_form("", "descricao")?></div>
+                    <div class="form-group"><label>Tipo:*</label>
                     <?= input_form("radio", "tipo","","C","checked")?>Com Cobertura&nbsp;
-                    <?= input_form("radio", "tipo","","S")?>Sem Cobertura</td></tr>
-                    <tr><td>Tamanho:*</td><td>
+                    <?= input_form("radio", "tipo","","S")?>Sem Cobertura</div>
+                     <div class="form-group"><label>Tamanho:*</label>
                     <?= input_form("radio", "tamanho","","P")?>Pequeno&nbsp;
                     <?= input_form("radio", "tamanho","","M","checked")?>Medio&nbsp;
-                    <?= input_form("radio", "tamanho","","G")?>Grande</td></tr>
-                    <tr><td>Valor Inicial(por 15 minutos):</td><td><?= input_form("", "valor")?></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;<?= input_form("hidden", "casa","campocasa")?></td></tr>
-                    <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
-                </table>
+                    <?= input_form("radio", "tamanho","","G")?>Grande</div>
+                     <div class="form-group"><label>Valor Inicial(por 15 minutos):</label><?= input_form("", "valor")?></div>
+                    <div class="form-group"><small>(<b>*</b>) Campos Obrigatórios</small></div>
+                   <div class="form-group"><?= input_form("hidden", "casa","campocasa")?></div>
+                    <div class="form-group"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
+                </div>
                 <?= fecha_form() ?>
             </div>
                 <?php 
@@ -295,9 +302,13 @@
             }
             $ib->fecharBanco();
             ?>
-            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
     </body>
 </html>
