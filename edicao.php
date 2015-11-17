@@ -69,24 +69,49 @@
                 
                 
             ?>
-            <h3 class="titulo1">Configurar Usuario - Login: <?=$dados['us_login']?></h3>
-            <div class="container1">    
-                <?= abrir_form("post", "usuario", "atualizar.php?tipo=US", "return validaUsuario(this,'E');")?>
-                <table>
-                    <tr><td>Nome:*</td><td><?= input_form("", "nome","",$dados['us_nome'],"size='30'")?></td></tr>
-                    <tr><td>Sexo</td><td>
-                    <?= input_form("radio", "sexo","","M", ($dados['us_sexo'] == 'M'?"checked":""))?>Masculino&nbsp;
-                    <?= input_form("radio", "sexo","","F", ($dados['us_sexo'] == 'F'?"checked":""))?>Feminino</td></tr>
-                    <tr><td>Data Nascimento:*</td><td><?= input_form("", "nascimento","nascimento",formatar_data_barras($dados['us_datanascimento'],"dd/mm/yyyy"),"size='9'")?></td></tr>
-                    <tr><td>Telefone(DDD sem 0):</td><td><?= input_form("", "telefone","telefone",$dados['us_telefone'],"size='12'")?></td></tr>
-                    <tr><td>RG:</td><td><?= input_form("", "rg","",$dados['us_rg'],"size='12'")?></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td colspan="2"><?= input_form("submit", "","","Atualizar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
-                </table>
-                <?= fecha_form() ?>
+            <h3>Configurar Usuario - Login: <?=$dados['us_login']?></h3>
+            <div class="box">
+              <div class="row">  
+            <div class="col-sm-6">  
+            <div class="row">
+            <?= abrir_form("post", "usuario", "atualizar.php?tipo=US", "return validaUsuario(this,'E');")?>
+            <div class="form-group">
+                <label>Nome:*</label>
+              
+                    <?= input_form("", "nome","",$dados['us_nome'],"size='30' class='form-control'")?>
+                
             </div>
+            <div class="form-group">
+                <label>Sexo</label>
+                
+                    <?= input_form("radio", "sexo","","M", ($dados['us_sexo'] == 'M'?"checked":""))?>Masculino&nbsp;
+                    <?= input_form("radio", "sexo","","F", ($dados['us_sexo'] == 'F'?"checked":""))?>Feminino
+                
+            </div>
+            <div class="form-group">
+                 <label>Data Nascimento:*</label>
+              
+                    <?= input_form("", "nascimento","nascimento",formatar_data_barras($dados['us_datanascimento'],"dd/mm/yyyy"),"size='9' class='form-control'")?>
+               
+            </div>
+                <div class="form-group"><label>Telefone(DDD sem 0):</label>
+                 <?= input_form("", "telefone","telefone",$dados['us_telefone'],"size='12' class='form-control'")?>
+            </div>
+                <div class="form-group">
+                 <label>RG:</label>
+                    <?= input_form("", "rg","",$dados['us_rg'],"size='13' class='form-control'")?>
+            </div>
+                <div class="form-group"><label><small>(<b>*</b>) Campos Obrigatórios</small></label>
+                </div>
+                <div class="form-group">
+                    <?= input_form("submit", "","","Atualizar",array("class" => "btn btn-info","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?>
+            </div>
+            
+            <?= fecha_form() ?>
+                </div>
+                </div>
+            </div>
+        </div>
             <?php 
             
             //Editando dados do veiculo

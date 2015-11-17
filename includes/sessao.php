@@ -8,7 +8,7 @@
          }
          
          if(!isset($_SESSION['login'])){
-            header("location: mensagens.php?m=1");exit;
+            header("location: login.php?");exit;
          }
          
          

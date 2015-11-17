@@ -1,5 +1,4 @@
     <?php 
- if(isset($_GET['login']))
     require "includes/sessao.php";
 
      //incluindo arquivo de conexao ao banco
@@ -43,45 +42,47 @@
                   <p><img src="img/animal.png"><?php if($casa['cs_animal']=='S')echo "Presença de animais";else echo "Não há presença de animais";?></p>
                   <p><img src="img/seguro.png"><?php if($casa['cs_seguro']=='S')echo "Seguro residencial";else echo "Não há seguro residencial";?></p>
                   <h2>Vagas Disponíveis</h2>
+                  <?php 
+            
+                $vg = new Vaga();
+                $dado = array("vg_casa"=>$cod,
+                            "vg_bloqueado"=>'N',
+                            "vg_status"=>'A');
+                $result = $ib->executarSQL($vg->buscar("vg_codigo, vg_descricao, vg_valorinicial, vg_tipo, vg_tamanho, vg_situacao",$dado,"","vg_codigo"));
+
+               // echo "Query:".$vg->buscar("vg_descricao, vg_valorinicial, vg_tipo, vg_tamanho, vg_situacao",$dado,"");
+
+                $nl = $ib->obterQtdeSQL($result);
+               if($nl != 0){
+                        $i=1;
+                    while($vaga = $ib->obterDadosSQL($result)):
+                        
+                ?>
                   <div class="property-detail-overview">
                                     <div class="property-detail-overview-inner clearfix">
-                                    	<h3>Vaga 1</h3><p>Aqui estara a descrição da primeira vaga</p>
+                                    	<h3>Vaga <?=$i;?></h3><p><?=$vaga['vg_descricao'];?></p>
                                         <div class="property-detail-overview-item col-sm-6 col-md-2">
                                             <strong>Valor Inicial:</strong>
-                                            <span>R$ 15.00</span>
+                                            <span>R$ <?=$vaga['vg_valorinicial']?></span>
                                         </div><!-- /.property-detail-overview-item -->
 
                                         <div class="property-detail-overview-item col-sm-6 col-md-2">
                                             <strong>Tipo:</strong>
-                                            <span>Coberta</span>
+                                            <span><?php if($vaga['vg_tipo']=='C'){echo "Coberta";}else{echo "Descoberta";}?></span>
                                         </div><!-- /.property-detail-overview-item -->
 
                                         <div class="property-detail-overview-item col-sm-6 col-md-2">
                                             <strong>Tamanho:</strong>
-                                            <span>Grande</span>
+                                            <span><?php if($vaga['vg_tamanho']=='M'){echo "Média";}else if($vaga['vg_tamanho']=='P'){echo "Pequena";}else if($vaga['vg_tamanho']=='G'){echo "Grande";}?></span>
                                         </div><!-- /.property-detail-overview-item -->
+                                         <a href="cadastro.php?tipo=SV&vg=<?=$vaga['vg_codigo']?>" class="btn btn-info">Entrar</a>
                                     </div><!-- /.property-detail-overview-inner -->
                                 </div><!-- /.property-detail-overview -->
-                  <div class="property-detail-overview">
-                                    <div class="property-detail-overview-inner clearfix">
-                                    	<h3>Vaga 2</h3>
-                                    	<p>Aqui estara a descrição da segunda vaga</p>
-                                        <div class="property-detail-overview-item col-sm-6 col-md-2">
-                                            <strong>Valor Inicial:</strong>
-                                            <span>R$ 15.00</span>
-                                        </div><!-- /.property-detail-overview-item -->
 
-                                        <div class="property-detail-overview-item col-sm-6 col-md-2">
-                                            <strong>Tipo:</strong>
-                                            <span>Coberta</span>
-                                        </div><!-- /.property-detail-overview-item -->
-
-                                        <div class="property-detail-overview-item col-sm-6 col-md-2">
-                                            <strong>Tamanho:</strong>
-                                            <span>Grande</span>
-                                        </div><!-- /.property-detail-overview-item -->
-                                    </div><!-- /.property-detail-overview-inner -->
-                                </div><!-- /.property-detail-overview -->
+                    <?php $i++; endwhile;
+                }
+                  ?>
+                  
                 </div>
 
             </div>

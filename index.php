@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php 
     
-   session_start()
+   session_start();
 ?>
 <html>
     <head>
@@ -15,7 +15,7 @@
             if(isset($_SESSION['login'])){
                 header('location: principal.php');exit;
             }else{
-                header ("location: principal.php");exit;
+                header ("location: login.php");exit;
             }
             
             

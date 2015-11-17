@@ -22,7 +22,7 @@
     </head>
     <body>
         <div class="container">
-            <?php include "includes/menu.php"?>
+            <?php include "includes/menu.php";?>
         <h3 class="titulo1">BEM VINDO <?=strtoupper($_SESSION['login'])?></h3>
         
         <p>Esta é a pagina principal.</p>

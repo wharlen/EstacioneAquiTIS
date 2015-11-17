@@ -7,7 +7,7 @@ function initialize() {
 	var latlng = new google.maps.LatLng(-18.8800397, -47.05878999999999);
 	
     var options = {
-        zoom: 6,
+        zoom: 10,
 		center: latlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -50,8 +50,9 @@ function carregarPontos() {
 
 			var myOptions = {
 				content: "<p>Endereço " + ponto.cs_endereco +", "+ ponto.cs_bairro+", "+ponto.cs_numero +" - "+ ponto.cs_cep+
-				"</p></br><p>Seguro:"+seguro+"</p><p>Animal:"+animal+"</p>"+"<p><a href='detalhes.php?tipo=CS&cod="
-				+ponto.cs_codigo+"'>Ver detalhes da vaga</a></p>",
+				"</p><p><img src='img/animal.png' alt='Seguro residencial'>Seguro residencial:"+seguro+"</p><p><img src='img/seguro.png' alt='Seguro residencial'>Presença de animal:"+animal+"</p><p>Há "+
+				ponto.qtd_vagas+" vagas disponiveis nessa casa</p>"+"<p><a href='detalhes.php?tipo=CS&cod="
+				+ponto.cs_codigo+"'>Ver detalhes da casa</a></p>",
 				pixelOffset: new google.maps.Size(-150, 0)
         	};
 

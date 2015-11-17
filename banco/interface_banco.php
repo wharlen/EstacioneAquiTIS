@@ -39,7 +39,7 @@
         // Função que serve para obter os dados da consulta SQL por linhas
         public function obterDadosSQL($resultado){
             if($resultado != ''){
-            return mysqli_fetch_array($resultado);
+            return mysqli_fetch_array($resultado, MYSQL_ASSOC);
             }
             return '';
         }

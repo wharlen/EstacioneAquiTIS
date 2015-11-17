@@ -12,16 +12,26 @@
 ?>
 <?php
 
- $cs = new Casa();
-$result = $ib->executarSQL($cs->buscar("",array("cs_usuario"=>$_SESSION['codigo_usuario'], "cs_bloqueado"=>"!S"),"!E","cs_cidade"));
- $nl = $ib->obterQtdeSQL($result);
+$vg = new Vaga();  
 
+$cs = new Casa();
+//TIRADO DA QUERY "cs_usuario"=>$_SESSION['codigo_usuario'],
+$result = $ib->executarSQL($cs->buscar("",array("cs_bloqueado"=>"!S"),"!E","cs_cidade"));
+$nl = $ib->obterQtdeSQL($result);
 $i = 0;
 
 $lastx = array('pontos' => array());
 
 while($casa = $ib->obterDadosSQL($result))
 {
+    
+      $dado = array("vg_casa"=>$casa['cs_codigo'],
+                            "vg_bloqueado"=>'N',
+                            "vg_status"=>'A');
+        $resultv = $ib->executarSQL($vg->buscar("vg_codigo",$dado,""));
+        $nv = $ib->obterQtdeSQL($resultv);
+
+
   $lastx['pontos'][$i]['cs_codigo']   = $casa['cs_codigo'];
   $lastx['pontos'][$i]['cs_cep']   = $casa['cs_cep'];
   $lastx['pontos'][$i]['cs_endereco'] = $casa['cs_endereco'];
@@ -31,11 +41,13 @@ while($casa = $ib->obterDadosSQL($result))
   $lastx['pontos'][$i]['cs_animal'] = $casa['cs_animal'];
   $lastx['pontos'][$i]['cs_latitude'] = $casa['cs_latitude'];
   $lastx['pontos'][$i]['cs_longitude'] = $casa['cs_longitude'];
-
+  $lastx['pontos'][$i]['qtd_vagas'] = $nv;
   $i++;
+ 
 }
 
 // json_encode é função mais importante e faz parte do Core PHP 5.x
 $JSON = json_encode($lastx);
 print_r($JSON);
-?>
+?>  
+<?php $ib->fecharBanco(); ?>

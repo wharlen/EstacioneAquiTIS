@@ -5,7 +5,7 @@
     <li class="menuparent">
         <a href="index.php">Home</a>
     </li>
-
+<?php if(isset($_SESSION['login'])): ?>
     <li class="menuparent">
         <a href="#">Casa</a>
         <ul class="sub-menu">
@@ -43,7 +43,7 @@
                 <li><a href="enquete.php">Enquete de Satisfação</a></li>
                 <li><a href="fechamento.php">Fechar Serviço</a></li></ul>             
     </li>
-      <?php if(isset($_SESSION['login'])): ?>
+      
     <li class="menuparent">
       
         <a href="#">Opçoes</a>

@@ -138,9 +138,9 @@
                 //Galeria de Vaga
                 }elseif($_GET['tipo'] == "VG"){ 
                 
-                    echo "<h2 class='titulo1'>Configurar Vagas</h2>";
+                    echo "<h2>Configurar Vagas</h2>";
                 ?>
-            <div class="container1">    
+            <div class="box">    
                 <?php       
                 $vg = new Vaga();
                 $result1 = $ib->executarSQL($vg->buscar("distinct cs_endereco, cs_numero, cs_codigo",array("cs_usuario"=>$_SESSION['codigo_usuario']),"!E","cs_codigo","casa"));
@@ -151,11 +151,10 @@
                      $nlb = $ib->obterQtdeSQL($result2);
                 if($nlb != 0){
                 ?>
-            <div class='tablediv'>
-                <h3 style="cursor:pointer" onclick="javascript: window.location.href='visualizar.php?tipo=CS&cod=<?=$casa['cs_codigo']?>'"><?=strtoupper(normalizarString($casa['cs_endereco'].", ".$casa['cs_numero']))?></h3>
+                <h4 style="cursor:pointer" onclick="javascript: window.location.href='visualizar.php?tipo=CS&cod=<?=$casa['cs_codigo']?>'"><?=strtoupper(normalizarString($casa['cs_endereco'].", ".$casa['cs_numero']))?></h4>
                
                 
-            <table border="1" class='tabela1'>
+            <table class='table-striped table-bordered table-responsive'>
                 <thead><tr>
                    
                     <th width="30%">Tipo</th>
@@ -191,9 +190,9 @@
                     <td><?=$tamanho?></td>
                     <td><?="R$".number_format($vaga['vg_valorinicial'], 2, ',', '.')?></td>
                     <td>
-                        <a href="visualizar.php?tipo=VG&cod=<?=$vaga['vg_codigo']?>" title="Visualizar"><img src="img/visualizar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="edicao.php?tipo=VG&cod=<?=$vaga['vg_codigo']?>"><img src="img/editar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
-                        <a href="javascript: validaExclusao('<?=$vaga['vg_codigo']?>', 'VG');" title="Excluir"><img src="img/excluir.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
+                        <a href="visualizar.php?tipo=VG&cod=<?=$vaga['vg_codigo']?>" title="Visualizar"><span class="glyphicon glyphicon-search"></span></a>
+                        <a href="edicao.php?tipo=VG&cod=<?=$vaga['vg_codigo']?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="javascript: validaExclusao('<?=$vaga['vg_codigo']?>', 'VG');" title="Excluir"><span class="glyphicon glyphicon-remove"></span></a>
                         
                     </td>
                     </tr></tbody>
@@ -201,12 +200,11 @@
                 <?php }
                 ?>
            </table> </div> 
-             <br><br> 
                     <?php
                    }
                    
                    }
-                   ?> <p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
+                   ?> <p><input type='button' value='Voltar' class='btn btn-info' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
              <?php
                 } 
                 else{
@@ -219,9 +217,9 @@
                 //Galeria de serviços
                 }elseif($_GET['tipo'] == "SV"){ 
                 
-                    echo "<h2 class='titulo1'>Meus Servicos</h2>";
+                    echo "<h2>Meus Servicos</h2>";
                 ?>
-            <div class="container1">    
+            <div class="box">    
                 <?php       
                 $sv = new Servico();
                 $result1 = $ib->executarSQL($sv->buscar("sv_codigo, cs_endereco, vg_descricao, cs_numero, vc_marca, vc_modelo, sv_datainicial, sv_datafinal, sv_valortotal, sv_situacao",
@@ -229,7 +227,7 @@
                 $nl = $ib->obterQtdeSQL($result1);
                 if($nl != 0){
                     ?><div>
-            <table border="1" class='tabela1'>
+            <table class='table-striped table-bordered'>
                 <thead><tr>
                     <th width="3%">Nº do Serviço</th>
                     <th width="24%">Endereco</th>
@@ -267,10 +265,10 @@
                     <td><?="R$".number_format($serv['sv_valortotal'],2,",",".")?></td>
                     <td><?=$situacao?></td>
                     <td>
-                        <a href="visualizar.php?tipo=SV&cod=<?=$serv['sv_codigo']?>" title="Visualizar"><img src="img/visualizar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
+                        <a href="visualizar.php?tipo=SV&cod=<?=$serv['sv_codigo']?>" title="Visualizar"><span class="glyphicon glyphicon-search"></span></a>
                 <!--    <a href="edicao.php?tipo=SV&cod=<?=$serv['cs_codigo']?>"><img src="img/editar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>-->
                         <?php if($serv['sv_situacao'] != 'F'){?>
-                        <a href="javascript: validaCancelar('<?=$serv['sv_codigo']?>','SV');" title="Cancelar Serviço"><img src="img/cancelar.gif" width="<?=$wdt?>" height="<?=$hdt?>"/></a>
+                        <a href="javascript: validaCancelar('<?=$serv['sv_codigo']?>','SV');" title="Cancelar Serviço"><span class="glyphicon glyphicon-remove-circle"></span></a>
                         <?php } ?>
                     </td>
                     </tr></tbody>
