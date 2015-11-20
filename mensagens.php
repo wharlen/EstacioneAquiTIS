@@ -96,7 +96,7 @@
                             $botao1 = "Voltar";
                         }elseif($_GET['m'] == 14){
                             echo "Vaga já está ocupada neste horário!<br>";
-                            $link1 = "history.go(-1)";
+                            $link1 = "location.href='procurar_vaga.php'";
                             $botao1 = "Voltar";
                         }elseif($_GET['m'] == 15){
                             echo "Sua resposta foi salva com sucesso!<br>Obrigado pela participação!<br>";

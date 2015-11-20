@@ -21,11 +21,7 @@
         <div class="map-wrapper">
             <div id="mapa"></div><!-- /#mapa -->
 
-        <script src="js/mapa/jquery.min.js"></script>
-        <script  src="http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyD0X4v7eqMFcWCR-VZAJwEMfb47id9IZao"></script>
-        <script src="js/mapa/infobox.js"></script>
-        <script src="js/mapa/markerclusterer.js"></script>
-        <script src="js/mapa/mapa.js"></script>
+
        
             <div class="container">
                 <div class="row">
@@ -184,7 +180,8 @@ A despeito da análise de alguns economistas, empresas grandes, pequenas e até 
 
 De tempos em tempos novas revoluções emergem, revoluções capazes de mudar tudo, do modo como trabalhamos ao modo como nos relacionamos. Estamos no centro de uma mudança de era e qualquer reflexão feita hoje, pode fazer menos sentido amanhã. Por isso, para não insistirmos em modelos obsoletos o melhor é enxergar as oportunidades que a economia do compartilhamento nos dá para não só sobrevivermos, como sairmos ainda melhores das crises econômicas que vem colocando em xeque o modo como entendemos mercados e a economia.
 </p>
-
+<p>Referencia:</p>
+<p><strong>Disponível em :<a href="http://www.troposlab.com/blog/o-que-e-meu-e-seu-economia-do-compartilhamento/" class="btn btn-link">http://www.troposlab.com/</a></strong></p>
                     </div>
                         <!-- /.block-content-inner -->
                 </div><!-- /.block-content -->                
@@ -192,7 +189,8 @@ De tempos em tempos novas revoluções emergem, revoluções capazes de mudar tu
         </div><!-- /#main-inner -->
     </div><!-- /#main -->
 </div><!-- /#main-wrapper -->
-
 </div><!-- /#wrapper -->
+<?php include "includes/rodape.php";?>
+        
 </body>
 </html>

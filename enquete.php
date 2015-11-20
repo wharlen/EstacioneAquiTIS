@@ -8,14 +8,15 @@
     include "includes/funcoes.php";
     
     include "includes/configsys.php";
+
+    include "includes/header_site.php";
+
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?=$titulosys?></title>
+
         <?php   
             include "includes/js-jquery.php"; 
             include "includes/css.php"; 
+            include "includes/cabec_site.php";
         ?>
         
         <script type="text/javascript">
@@ -67,14 +68,17 @@
         
     </head>
     <body>
-        <div align="center">
+  <div id="main-wrapper">
+     <div id="main">
+        <div id="main-inner">
+            <div class="container">
             <?php
             
             include "includes/menu.php";
             
             ?>
-            <h3 class="titulo1">Enquete de satisfação</h3>
-            <div class="container1">
+            <h3 class="center">Enquete de satisfação</h3>
+            <div class="box">
                 <?=abrir_form("post", "satisfacao", "salvar.php?tipo=SF", "return validaEnquete(this);")?>
                 
                 <?php
@@ -111,7 +115,7 @@
                     }else{
                        echo "Não há proprietários à serem avaliados!<br><br>";
                        ?>
-                       <input type="button" class="botao01" value="Voltar" onclick="javascript: window.location.href='principal.php'"    
+                       <input type="button" class="btn btn-default" value="Voltar" onclick="javascript: window.location.href='principal.php'"    
                        <?php
                     }
                     $ib->fecharBanco();
@@ -119,5 +123,10 @@
             </div>
             
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
     </body>
 </html>

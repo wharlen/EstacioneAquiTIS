@@ -1,28 +1,17 @@
 <?php
-    
+    //incluindo arquivo de sessão
     require "includes/sessao.php";
-    
+    //incluindo arquivo de conexao ao banco
     require "includes/database.php";
+    //incluindo arquivo de Classes/Modelos de dados
     require "includes/modelo.php";
-    
+    //incluindo arquivo de funções auxiliares
     include "includes/funcoes.php";
-    
+    //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?=$titulosys?></title>
-        <?php   
-            include "includes/js-jquery.php"; 
-            include "includes/css.php";
-            
-            
-            $tp = $_GET['tipo']; 
-            $cod = $_GET['cod'];
-            
-        ?>
-        
+    <?php include"includes/header_site.php";?>
+  
         <script>
         //Função JQuery que serve para ativar impressão e esconder os botões "Imprimir" e "Voltar" para nao aparecer na impressão       
         $(document).ready(function(){
@@ -35,9 +24,23 @@
            });
         });
         </script>  
+    <?php
+
+        //Incluindo arquivos para leitura de javascript e CSS
+        include "includes/js-jquery.php"; 
+        include "includes/css.php";  
+        include "includes/maps.php";
         
-    </head>
-    <body>
+        include"includes/cabec_site.php";
+        $tp = $_GET['tipo']; 
+        $cod = $_GET['cod'];
+            
+        ?> 
+
+<div id="main-wrapper">
+   <div id="main">
+        <div id="main-inner">
+            <div class="container">
         <div align="center">
             <?php
             switch($tp){
@@ -79,9 +82,9 @@
             if(!isset($_GET['folha'])){
             include "includes/menu.php";
             ?>
-            <h3 class="titulo1">Dados d<?=$letrad?> <?=$tipo?></h3>
-            <div class="container1">
-                <table>
+            <h3 class="center">Dados d<?=$letrad?> <?=$tipo?></h3>
+            <div class="box">
+                <table class="table-striped table-bordered">
                 <?php
                 switch($tp){
                     case "US":
@@ -149,16 +152,16 @@
                 }               
                 
                 ?></table><br><br>
-                    <input type="button" class="botao01" value="Gerar Relatório" onclick="javascript: window.location.href='visualizar.php?tipo=<?=$tp?>&cod=<?=$cod?>&folha=1'"/>&nbsp;&nbsp;<input type="button" id="voltar" class="botao01" value="Voltar" onclick="javascript: window.history.go(-1)"/>
+                    <input type="button" class="btn btn-success" value="Gerar Relatório" onclick="javascript: window.location.href='visualizar.php?tipo=<?=$tp?>&cod=<?=$cod?>&folha=1'"/>&nbsp;&nbsp;<input type="button" id="voltar" class="botao01" value="Voltar" onclick="javascript: window.history.go(-1)"/>
                 
             </div>
             <?php } else{?>
-            <div class="folha">
+            <div class="box">
                 <br><br>
                 <h1>ESTACIONE AQUI.COM</h1>
                 
                 <h2>Relatório d<?=$letrad?> <?=$tipo?></h2>
-                <table>
+                <table class="table-striped table-bordered table-responsive">
                 <?php
                 switch($tp){
                     case "US":
@@ -226,7 +229,7 @@
                 }               
                 
                 ?></table><br><br>
-                    <input type="button" id="imprimir" class="botao01" value="Imprimir"/>&nbsp;&nbsp;<input type="button" id="voltar" class="botao01" value="Voltar" onclick="javascript: window.history.go(-1)"/>
+                    <input type="button" id="imprimir" class="btn btn-success" value="Imprimir"/>&nbsp;&nbsp;<input type="button" id="voltar" class="botao01" value="Voltar" onclick="javascript: window.history.go(-1)"/>
                 
                 
             </div>
@@ -234,6 +237,12 @@
             $ib->fecharBanco();
             
             ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

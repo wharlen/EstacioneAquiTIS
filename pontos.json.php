@@ -16,7 +16,11 @@ $vg = new Vaga();
 
 $cs = new Casa();
 //TIRADO DA QUERY "cs_usuario"=>$_SESSION['codigo_usuario'],
+if(isset($_SESSION['codigo_usuario']))
+$result = $ib->executarSQL($cs->buscar("",array("cs_usuario"=>"!".$_SESSION['codigo_usuario'],"cs_bloqueado"=>"!S"),"!E","cs_cidade"));
+else
 $result = $ib->executarSQL($cs->buscar("",array("cs_bloqueado"=>"!S"),"!E","cs_cidade"));
+
 $nl = $ib->obterQtdeSQL($result);
 $i = 0;
 
@@ -24,14 +28,14 @@ $lastx = array('pontos' => array());
 
 while($casa = $ib->obterDadosSQL($result))
 {
-    
-      $dado = array("vg_casa"=>$casa['cs_codigo'],
-                            "vg_bloqueado"=>'N',
-                            "vg_status"=>'A');
-        $resultv = $ib->executarSQL($vg->buscar("vg_codigo",$dado,""));
-        $nv = $ib->obterQtdeSQL($resultv);
+    //buscancando quant de vagas para cada casa
+    $dado = array("vg_casa"=>$casa['cs_codigo'],
+                  "vg_bloqueado"=>'N',
+                  "vg_status"=>'A');
+    $resultv = $ib->executarSQL($vg->buscar("vg_codigo",$dado,""));
+    $nv = $ib->obterQtdeSQL($resultv);
 
-
+  //criando array de dados JSON
   $lastx['pontos'][$i]['cs_codigo']   = $casa['cs_codigo'];
   $lastx['pontos'][$i]['cs_cep']   = $casa['cs_cep'];
   $lastx['pontos'][$i]['cs_endereco'] = $casa['cs_endereco'];

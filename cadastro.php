@@ -15,16 +15,16 @@
     include "includes/funcoes.php";
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
-
+    //arquivo de header principal
    include"includes/header_site.php";
 
         //Incluindo arquivos para leitura de javascrript e CSS
-            include "includes/js-jquery.php"; 
-            include "includes/css.php"; 
-            if($_GET['tipo']=='CS')
-            {
+            include "includes/js-jquery.php";
         ?>
-        <script type="text/javascript">
+    
+    <script type="text/javascript">
+            
+            $(document).ready(function(){
                $("#botaoscasa").click(function(){
                    if($("#casadavaga").val() != ""){
                        $("#inserirvaga").show();
@@ -41,9 +41,15 @@
                $("#horai, #horaf").mask("99:99");
                $("#telefone").mask("(99) 9999-9999");
                $("#ano").mask("9999");
-               $("#placa").mask("aaa-9999");      
+               $("#placa").mask("aaa-9999");
+            });
+            
         </script>
-        <?php } require"includes/maps_cadastro.php";
+
+        <?php
+            if($_GET['tipo']=='CS')
+            require"includes/maps_cadastro.php";
+
            include"includes/cabec_site.php";?>
 <div id="main-wrapper">
    <div id="main">
@@ -55,32 +61,38 @@
             if(isset($_GET)){
              
             $botaovoltar =  input_form("button", "","","Voltar",array("onclick"=>"window.location.href='index.php'",
-                "class" => "botao01","style" => "margin:auto"));  
+                "class" => "btn btn-default","style" => "margin:auto"));  
             
             //Cadastro de Usuario
             if($_GET['tipo'] == "US"){
             ?>
-            <h3 class="titulo1">Cadastre-se</h3>
-            <div class="container1">    
+            <h3>Cadastre-se</h3>
+            <div class="box">    
                 <?= abrir_form("post", "usuario", "salvar.php?tipo=US", "return validaUsuario(this,'C');")?>
-                <table>
-                    <tr><td>Nome:*</td><td><?= input_form("", "nome","","","size='30'")?></td></tr>
-                    <tr><td>CPF:*</td><td><?= input_form("", "cpf","cpf","","size='12'")?></td></tr>
-                    <tr><td>Sexo</td><td>
+                <div class="form-group">
+                    <label>Nome:*</label><?= input_form("", "nome","","","size='30'")?></div>
+                    <div class="form-group">
+                    <label>CPF:*</label><?= input_form("", "cpf","cpf","","size='12'")?></div>
+                    <div class="form-group">
+                    <label>Sexo</label>
                     <?= input_form("radio", "sexo","","M", "checked")?>Masculino&nbsp;
-                    <?= input_form("radio", "sexo","","F")?>Feminino</td></tr>
-                    <tr><td>Data Nascimento:*</td><td><?= input_form("", "nascimento","nascimento","","size='9'")?></td></tr>
-                    <tr><td>Telefone(DDD sem 0):</td><td><?= input_form("", "telefone","telefone","","size='12'")?></td></tr>
-                    <tr><td>RG:</td><td><?= input_form("", "rg","","","size='12'")?></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td>Login:*</td><td><?= input_form("", "login")?></td></tr>
-                    <tr><td>Senha:*</td><td><?= input_form("password", "senha")?></td></tr>
-                    <tr><td>Confirma Senha:*</td><td><?= input_form("password", "csenha")?></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></td></tr>
-                </table>
+                    <?= input_form("radio", "sexo","","F")?>Feminino</div>
+                    <div class="form-group">
+                    <label>Data Nascimento:*</label><?= input_form("", "nascimento","nascimento","","size='9'")?></div>
+                    <div class="form-group">
+                    <label>Telefone(DDD sem 0):</label><?= input_form("", "telefone","telefone","","size='12'")?></div>
+                    <div class="form-group">
+                    <label>RG:</label><?= input_form("", "rg","","","size='12'")?></div>
+                    <div class="form-group">
+                    <label>Login:*</label><?= input_form("", "login")?></div>
+                    <div class="form-group">
+                    <label>Senha:*</label><?= input_form("password", "senha")?></div>
+                   <div class="form-group">
+                    <label>Confirma Senha:*</label><?= input_form("password", "csenha")?></div>
+                    <div class="form-group">
+                    <label><small>(<b>*</b>) Campos Obrigatórios</small></label>
+                    <?= input_form("submit", "","","Cadastrar",array("class" => "btn btn-success","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?>
+                </div>
                 <?= fecha_form() ?>
             </div>
             <?php 
@@ -119,7 +131,9 @@
                 //Cadastro de Casa
             }elseif($_GET['tipo'] == "CS"){ ?>
                 <h2>Cadastrar Casa:</h2>
-            <div class="box">    
+            <div class="box">
+            <div class="row">    
+                <div class="col-sm-6">
                 <?= abrir_form("post", "casa", "salvar.php?tipo=CS", "return validaCasa(this,'C');")?>
                 <div class="form-group">
                     <label>CEP:*</label><?= input_form("", "cep","cep","","size='12' onblur='javascript: pesquisacep(this.value);'")?></div>
@@ -147,24 +161,25 @@
                     <?= input_form("radio", "pacote","","6m")?>aprox. 6 meses: R$182,00&nbsp;
                     <?= input_form("radio", "pacote","","1a")?>1 ano: R$365,00&nbsp;
                     </div>
-                    
+                </div>
+                    <div class="col-sm-6">
                     <div class="form-group">
-                    <label>Procurar no mapa: </label>
                     <?= input_form("hidden", "latitude","latitude","","size='20' class=\"lat\"")?>
-                    <?= input_form("hidden", "longitude","longitude","","size='20'")?>
-                    
-                    <input id="txtAddress" type="text" class="text" value=""/> <input type="button" id="btnGo" value="Procurar" />
-                    <span id="spnCoordinates" style="color:Green;font-weight:bold;"></span>
+                    <?= input_form("hidden", "longitude","longitude","","size='20'")?>                    
+                    <input id="txtAddress" type="text" class="text" value=""/> <button type="button" class="btn btn-info" id="btnGo">Procurar no mapa<span class="glyphicon glyphicon-map-marker"></span></button>
                     </div>
                     <div class="form-group">
-                    <label>(<b>*</b>) Campos Obrigatórios</small></label>
-                    </div>
-                   <div class="form-group">
-                    <?= input_form("submit", "","","Cadastrar",array("class" => "btn btn-success","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
-                 <div class="form-group">
-                 <div id="map_canvas" width="100%" height="250px">
+                 <div id="map_canvas" style="width:100%; height:400px!important">
                     </div>
                 </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="form-group center">
+                    <label>(<b>*</b>) Campos Obrigatórios</small></label>
+                    <?= input_form("submit", "","","Cadastrar",array("class" => "btn btn-success","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
+                 
+            </div>
                 <?= fecha_form() ?>
             </div>
                 <?php 
@@ -192,7 +207,7 @@
                             }
                             ?>
                             </select></div>
-                        <div class="form-group"><input type="button" id="botaoscasa" value="Adicionar" class="botao01"></div>
+                        <div class="form-group"><button type="button" id="botaoscasa" class="btn btn-success">Adicionar</button></div>
                 
                 <div id="inserirvaga" style="display:none">
                      <div class="form-group"><label>Descrição da vaga:</label><?= input_form("", "descricao")?></div>
@@ -206,7 +221,7 @@
                      <div class="form-group"><label>Valor Inicial(por 15 minutos):</label><?= input_form("", "valor")?></div>
                     <div class="form-group"><small>(<b>*</b>) Campos Obrigatórios</small></div>
                    <div class="form-group"><?= input_form("hidden", "casa","campocasa")?></div>
-                    <div class="form-group"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
+                    <div class="form-group"><?= input_form("submit", "","","Cadastrar",array("class" => "btn btn-info","style" => "margin:auto"))?>&nbsp;<?=$botaovoltar?></div>
                 </div>
                 <?= fecha_form() ?>
             </div>
@@ -214,12 +229,12 @@
                 
                 //Cadastro de Serviços
                 }elseif($_GET['tipo'] == "SV"){ ?>
-                <h3 class="titulo1">Opçoes para alugar:</h3>
-            <div class="container1">    
+                <h3 class="center">Opçoes para alugar:</h3>
+            <div class="box">    
                 <?php
                 if(!isset($_POST['layers'])){?>
                 <?= abrir_form("post", "servico", "cadastro.php?tipo=SV", "return validaServicoVeic(this);")?>
-                <table >
+                <table class="table-bordered table-striped">
                     <tr>
                         
                         <?php
@@ -242,29 +257,28 @@
                             </select></td>
                         <td><input type="hidden" name="vg" value="<?=$_GET['vg']?>"/>
                             <input type="hidden" name="layers" value="1"/>
-                            <input type="submit" value="Adicionar" class="botao01"/></td>
+                            <input type="submit" value="Adicionar" class="btn btn-info"/></td>
                         <?php }else echo "Você ainda não possui veiculos registrados, <br>Registre um veiculo para continuar.<br><br>$botaovoltar" ?>
                     </tr>
                     
             </table>
                 <?= fecha_form() ?>
-                <br>
+                
                 <?php 
                 }elseif($_POST['layers'] == 1){
                 ?>
                 <?= abrir_form("post", "servico", "cadastro.php?tipo=SV", "return validaServico(this,'C');")?>
-                <br>
-                <table>
-                    <tr><td>Data Inicial:*</td><td><?= input_form("", "datai","datai")?>&nbsp;Hora:*</td><td><?= input_form("", "horai","horai")?></td></tr>
-                    <tr><td>Data Final:*</td><td><?= input_form("", "dataf","dataf")?>&nbsp;Hora:*</td><td><?= input_form("", "horaf","horaf")?></td></tr>
+                
+                    <div class="form-group"><label>Data Inicial:*</label><?= input_form("", "datai","datai")?>&nbsp;Hora:*</td><td><?= input_form("", "horai","horai")?></div>
+                    <div class="form-group"><label>Data Final:*</label><?= input_form("", "dataf","dataf")?>&nbsp;Hora:*</td><td><?= input_form("", "horaf","horaf")?></div>
                     
-                    <tr><td>&nbsp;<?= input_form("hidden", "layers",'',"2")?>&nbsp;<?= input_form("hidden", "veiculo",'',$_POST['veic'])?>&nbsp;<?= input_form("hidden", "vaga","",$_POST['vg'])?></td></tr>
-                    <tr><td><small>(<b>*</b>) Campos Obrigatórios</small></td></tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td colspan="2"><?= input_form("submit", "","","Cadastrar",array("class" => "botao01","style" => "margin:auto"))?>&nbsp;
+                    <div class="form-group">&nbsp;<?= input_form("hidden", "layers",'',"2")?>&nbsp;<?= input_form("hidden", "veiculo",'',$_POST['veic'])?>&nbsp;<?= input_form("hidden", "vaga","",$_POST['vg'])?>
+                    <small>(<b>*</b>) Campos Obrigatórios</small></div>
+                    <div class="form-group">&nbsp;
+                    <?= input_form("submit", "","","Cadastrar",array("class" => "btn btn-info","style" => "margin:auto"))?>&nbsp;
                         <?=input_form("button", "","","Cancelar",array("onclick"=>"window.location.href='index.php'",
-                "class" => "botao01","style" => "margin:auto"))?></td></tr>
-                </table>
+                "class" => "btn btn-default","style" => "margin:auto"))?></div>
+                
                 <?= fecha_form() ?>
                 <?php }elseif($_POST['layers'] == 2){
                     

@@ -1,5 +1,5 @@
 <?php
-//incluindo arquivo de sessão
+    //incluindo arquivo de sessão
     require "includes/sessao.php";
     //incluindo arquivo de conexao ao banco
     require "includes/database.php";
@@ -10,23 +10,20 @@
     //incluindo arquivo de titulo da pagina
     include "includes/configsys.php";
 ?>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title><?= $titulosys ?></title>
-        <?php
-        //Incluindo arquivos para leitura de javascrript e CSS
-        include "includes/js-jquery.php";
-        include "includes/css.php";
-        ?>
+    <?php include"includes/header_site.php";
 
-    </head>
-    <body>
-        <div align="center">
-            <?php
-            include "includes/menu.php";
-            ?>
-            <div>
+        //Incluindo arquivos para leitura de javascript e CSS
+        include "includes/js-jquery.php"; 
+        include "includes/css.php";  
+        include "includes/maps.php";
+        
+        include"includes/cabec_site.php";?> 
+
+<div id="main-wrapper">
+   <div id="main">
+        <div id="main-inner">
+            <div class="container">
+
                 <?php
                 if (isset($_GET['o'])) {
 
@@ -57,20 +54,20 @@
                     
                     $titles2 = "";
                     
-                    $linkvoltar = "<input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href = ".'"principal.php"'."'>"
+                    $linkvoltar = "<input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href = ".'"principal.php"'."'>"
                     ?>
-                    <h3 class="titulo1"><?=$titles1?></h3>
+                    <h3 class="center"><?=$titles1?></h3>
 
                     <?php
                     $sv = new Servico();
                     $result = $ib->executarSQL($sv->buscar("sv_codigo, sv_datainicial, sv_veiculo, sv_vaga, vg_descricao, vc_marca, vc_modelo, c.us_nome, c.us_telefone, cs_endereco, cs_numero ", array("sv_situacao" => "P", "cs_usuario" => $_SESSION['codigo_usuario']), "!E", "sv_datainicial", array("veiculo", "vaga", "casa", "usuario c")));
                     $nl = $ib->obterQtdeSQL($result);
                     ?>
-                    <div class="container1"> 
+                    <div class="box"> 
                     <?php if ($nl != 0) { ?>
                         <h3><?=$titles2?></h3>
                         
-                        <table border="1" class="tabela1">
+                        <table class="table-striped table-bordered">
                                 <thead>
                                     <tr>
                                         <th width="12%">Nº Serviço</th>
@@ -96,7 +93,7 @@
                                             <td><?= $dados['us_telefone'] ?></td>
                                             <td><?= $dados['vc_marca'] . " - " . $dados['vc_modelo'] ?></td>
                                             <td><?= formatar_data_barras($dados['sv_datainicial'], "dd/mm/yyyy") . " " . substr(obter_sohora($dados['sv_datainicial']), 0, 5) ?></td>
-                                            <td><a href="solicitacao.php?o=1&vg=<?= $dados['sv_vaga'] ?>&vc=<?= $dados['sv_veiculo'] ?>&c=<?= $dados['sv_codigo'] ?>">Aceitar Aluguel</a>/<a href="solicitacao.php?o=2">Recusar Aluguel</a></td>
+                                            <td><a href="solicitacao.php?o=1&vg=<?= $dados['sv_vaga'] ?>&vc=<?= $dados['sv_veiculo'] ?>&c=<?= $dados['sv_codigo'] ?>" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span></a><a href="solicitacao.php?o=2" class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span></a></td>
 
                                         </tr>
         <?php } ?>
@@ -114,7 +111,11 @@
                 <?php
                 $ib->fecharBanco();
                 ?>
+                </div>
+            </div>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>
 

@@ -75,12 +75,12 @@
                 <?php }
                 ?>
             </table> </div>   
-                <?php?> <p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
+                <?php?> <p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
            <?php
                 } 
                 else{
                     echo "<div align='center'><p>Não há Veiculos Cadastrados</p>"
-                    . "<p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
+                    . "<p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
                     . "</div>";
                 }
                 ?></div><?php
@@ -124,12 +124,12 @@
                 <?php }
                 ?>
             </table>  </div> 
-                    <p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
+                    <p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
             <?php
                 } 
                 else{
                     echo "<div align='center'><p>Não há Casas cadastradas</p>"
-                    . "<p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
+                    . "<p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
                     . "</div>";
                 }
                 ?></div><?php 
@@ -199,17 +199,17 @@
             
                 <?php }
                 ?>
-           </table> </div> 
+           </table>  
                     <?php
                    }
                    
                    }
-                   ?> <p><input type='button' value='Voltar' class='btn btn-info' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
+                   ?></div><p><input type='button' value='Voltar' class='btn btn-info' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
              <?php
                 } 
                 else{
                     echo "<div align='center'><p>Não há Vagas Cadastradas</p>"
-                    . "<p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
+                    . "<p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
                     . "</div>";
                 }
                 ?></div><?php 
@@ -276,12 +276,12 @@
                 <?php }
                 ?>
             </table>  </div> 
-                    <p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
+                    <p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
             <?php
                 } 
                 else{
                     echo "<div align='center'><p>Não há Serviços </p>"
-                    . "<p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
+                    . "<p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
                     . "</div>";
                 }
                 ?></div><?php               
@@ -347,12 +347,12 @@
                 <?php }
                 ?>
             </table>  </div> 
-                    <p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
+                    <p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href="principal.php"'></p>
             <?php
                 } 
                 else{
                     echo "<div align='center'><p>Não há Serviços </p>"
-                    . "<p><input type='button' value='Voltar' class='botao01' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
+                    . "<p><input type='button' value='Voltar' class='btn btn-default' style='margin:auto' onclick='javascript: window.location.href=".'"principal.php"'."'></p>"
                     . "</div>";
                 }
                 ?></div><?php           

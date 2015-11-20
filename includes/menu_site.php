@@ -38,7 +38,7 @@
         <ul class="sub-menu">
                 <li><a href="procurar_vaga.php">Estacionar em uma Vaga</a></li>
                 <li><a href="galeria.php?tipo=SV">Meus Serviços</a></li>
-                <li><a href="ver_vagas.php?tipo=CS">Serviços de Clientes</a></li>
+                <li><a href="galeria.php?tipo=SVU">Serviços de Clientes</a></li>
                 <li><a href="mensagens.php?m=23">Rotas de Acesso</a></li>
                 <li><a href="enquete.php">Enquete de Satisfação</a></li>
                 <li><a href="fechamento.php">Fechar Serviço</a></li></ul>             
@@ -54,8 +54,8 @@
                 <li><a href="sair.php?sair=1">Sair</a></li></ul>
     </li>
     <?php endif;?>
-<li class="menu"><a href="contato.php">Contato</li></a>
-<li class="menu"><a href="sobre.php">Sobre</li></a>
+<li class="menuparent"><a href="contato.php">Contato</li></a>
+<li class="menuparent"><a href="sobre.php">Sobre</li></a>
 </ul><!-- /.header-nav -->
 
                 </div>

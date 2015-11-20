@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+    //incluindo arquivo de sessão
+    //require "includes/sessao.php";
+    //incluindo arquivo de conexao ao banco
+    require "includes/database.php";
+    //incluindo arquivo de Classes/Modelos de dados
+    require "includes/modelo.php";
+    //incluindo arquivo de funções auxiliares
+    include "includes/funcoes.php";
+    //incluindo arquivo de titulo da pagina
+    include "includes/configsys.php";
+?>
 <?php
 session_start();
 if ((isset($_SESSION['login']) == true) and ( isset($_SESSION['senha']) == true)) {
@@ -6,11 +17,6 @@ if ((isset($_SESSION['login']) == true) and ( isset($_SESSION['senha']) == true)
     exit;
 }
 
-$con = mysqli_connect("localhost", "root", "") or die("Sem conexão com o servidor");
-$select = mysqli_select_db($con, "estacionebd") or die("Sem acesso ao DB");
-
-// A vriavel $result pega as varias $login e $senha, faz uma pesquisa na tabela de usuarios
-mysqli_query($con,"UPDATE CASA SET cs_bloqueado = 'S' WHERE cs_bloqueado != 'S' AND cs_datalimite < '" . date("Y-m-d") . "'");
 ?>
 <?php include"includes/header_site.php";
     include"includes/cabec_site.php";?>
@@ -47,7 +53,7 @@ mysqli_query($con,"UPDATE CASA SET cs_bloqueado = 'S' WHERE cs_bloqueado != 'S' 
 
                                 </div>
                                  <div class="col-sm-8">
-                            <div id="mapa"></div><!-- /#map -->
+                            <div id="mapa" style="width:100%; height:400px!important"></div><!-- /#map -->
                             <script src="js/mapa/jquery.min.js"></script>
                              <script src="js/mapa/jquery.js"></script>
                             <script  src="http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyD0X4v7eqMFcWCR-VZAJwEMfb47id9IZao"></script>

@@ -186,7 +186,7 @@ if (isset($_POST)) {
                     "where ((sv_datainicial <= '$data_ini' and sv_datafinal >= '$data_ini') or (sv_datainicial >= '$data_ini' and sv_datainicial >= '$data_fin') "
                     . "or sv_datainicial = '$data_ini' or sv_datafinal = '$data_ini') and sv_vaga = '$vaga' and sv_status != 'E' ","sql")));
        
-        
+        //echo $arqvaga;exit;
         if($nl != 0){
             header("location: mensagens.php?m=14");exit;
         }
